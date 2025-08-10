@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Prueba</title>
+  </head>
+  <body>
+    <div>
+      <h1>Test</h1>
+      <p th:text="${producto.nombreProducto}"></p>
+      <p th:text="${producto.idProducto}"></p>
+      <p th:text="${producto.precioProducto}"></p>
+      <p
+        th:text="${'Nombre del producto: '+ producto.nombreProducto +' Id Del Producto: '+ producto.idProducto + ' Precio del Producto:'+ producto.precioProducto}"
+      ></p>
+    </div>
+    <div th:if="${usuario != null}">
+      <h1>Datos Usuario</h1>
+      <p th:text="${'El nombre del usuario:' + usuario.nombreUsuario}"></p>
+      <p th:text="${'El id del usuario:' + usuario.idUsuario}"></p>
+      <p th:text="${'Los fondos del usuario: '+ usuario.fondosUsuario}"></p>
+    </div>
+    <div th:if="${usuario == null}">
+      <h2>No se ha establecido un usuario</h2>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Descripcion</th>
+            <th>Nombre Usuario</th>
+            <th>ID Usuario</th>
+            <th>Fondos Usuario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td th:text="factura.facturaDescripcion"></td>
+            <td th:text="factura.usuario.nombreUsuario"></td>
+            <td th:text="factura.usuario.idUsuario"></td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th>Nombre Del Producto:</th>
+            <th>Precio Del Producto:</th>
+            <th>Cantidad Del Producto:</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item: ${factura.listaFacturas}">
+                <td th:text="${item.producto.nombreProducto}"></td>
+                <td th:text="${item.producto.idProducto}"></td>
+                <td th:text="${item.producto.precioProducto}"></td>
+                <td th:text="${item.cantidad}"></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
