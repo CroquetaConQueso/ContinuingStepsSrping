@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.pepito.jose.model.ItemFactura;
 import com.pepito.jose.model.Producto;
@@ -14,7 +15,18 @@ import com.pepito.jose.model.Usuario;
 @Configuration
 public class AppConfig {
 
+    // @RequestScope asegura que este bean se cree de nuevo en cada solicitud HTTP.
+    // Antes, al ser un singleton por defecto, el mismo objeto Usuario se compartía
+    // entre todas las peticiones,
+    // provocando que los cambios (como concatenar el nombre en @PostConstruct) se
+    // acumularan.
+    // Con este scope, evitamos estado compartido y garantizamos que cada request
+    // reciba un Usuario "limpio".
+
+    //La destruccion del bean ocurre por defecto al tener un @RequestScope
+
     @Bean
+    @RequestScope
     public Usuario retUsuario() {
         Usuario usuario = new Usuario("Jose", 1, 200.2);
         return usuario;
