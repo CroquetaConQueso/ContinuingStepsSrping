@@ -22,6 +22,6 @@ public class Factura {
     @Qualifier("retUsuario")
     private Usuario usuario;
     @Autowired
-    @Qualifier("retLista")
+    @Qualifier("retListaOficina")
     private List<ItemFactura> listaFacturas;
 }
