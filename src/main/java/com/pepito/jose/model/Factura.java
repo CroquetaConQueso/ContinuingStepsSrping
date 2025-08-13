@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 // NOTA: Los @Component y @Controller en Spring son singletons por defecto.
 // Esto significa que solo existe una instancia en el contenedor para toda la aplicación.
-// Por este motivo, deben ser STATLESS (no almacenar estado mutable compartido),
+// Por este motivo, deben ser STATELESS (no almacenar estado mutable compartido),
 // ya que podría causar problemas de concurrencia, corrupción de datos o fuga de información entre usuarios.
 // Cualquier dato específico de una petición debe manejarse en variables locales,
 // beans con @RequestScope/@SessionScope o servicios diseñados para manejar estado de forma segura.
@@ -65,8 +65,8 @@ public class Factura implements Serializable {
     // preparar recursos que dependen de otras dependencias inyectadas.
     @PostConstruct
     public void init() {
-        usuario.setNombreUsuario(usuario.getNombreUsuario().concat(" José"));
-        facturaDescripcion.concat(" de " + usuario.getNombreUsuario());
+        usuario.setNameUsuario(usuario.getNameUsuario().concat(" José"));
+        facturaDescripcion.concat(" de " + usuario.getNameUsuario());
     }
 
     // Existen muchos contextos que se pueden establecer para cuando un objeto o

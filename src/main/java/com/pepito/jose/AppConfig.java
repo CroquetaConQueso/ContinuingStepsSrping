@@ -28,7 +28,7 @@ public class AppConfig {
     @Bean
     @RequestScope
     public Usuario retUsuario() {
-        Usuario usuario = new Usuario("Jose", 1, 200.2);
+        Usuario usuario = new Usuario("Jose","Perez","1234", 1, 200.2);
         return usuario;
     }
 
