@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Resultado    </title>
+  </head>
+  <body>
+    <div>
+        <h1>Resultado del Formulario</h1>
+        <ul>
+            <li>Nombre de Usuario: <span th:text="${usuario.nameUsuario}"></span></li>
+            <li>Apellido: <span th:text="${usuario.surnameUsuario}"></span></li>
+            <li>Contraseña: <span th:text="${usuario.passwordUsuario}"></span></li>
+            <li>ID Usuario: <span th:text="${usuario.idUsuario}"></span></li>
+            <li>Fondos: <span th:text="${usuario.fondosUsuario}"></span></li>
+        </ul>
+    </div>
+  </body>
+</html>

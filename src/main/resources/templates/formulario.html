@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulario</title>
+  </head>
+  <body>
+    <!--Para establecer que los datos van a ser tomados se ha de establecer th:action en el form. Especificando tambien que tipo de metodo va a ser(get,post,..)-->
+    <form th:action="@{/formulario}" method="post">
+      <div>
+        <h1>Formulario</h1>
+        <label for="nameUsuario">Nombre de Usuario</label>
+        <input
+          name="nameUsuario"
+          type="text"
+          placeholder="Introduzca el nombre.."
+          id="nameUsuario"
+        />
+      </div>
+      <div>
+        <label for="surnameUsuario">Appellido del Usuario</label>
+        <input
+          name="surnameUsuario"
+          type="text"
+          placeholder="Introduzca los apellidos.."
+          id="surnameUsuario"
+        />
+      </div>
+      <div>
+        <label for="passwordUsuario">Contraseña del Usuario</label>
+        <input
+          name="passwordUsuario"
+          type="password"
+          placeholder="Introduzca la contraseña.."
+          id="passwordUsuario"
+        />
+      </div>
+      <div>
+        <label for="idUsuario">ID del Usuario</label>
+        <input
+          name="idUsuario"
+          type="number"
+          placeholder="Introduzca el ID de usuario.."
+          id="idUsuario"
+        />
+      </div>
+      <div>
+        <label for="fondosUsuario">Fondos del Usuario</label>
+        <input
+          name="fondosUsuario"
+          type="text"
+          placeholder="Introduzca los fondos.."
+          id="fondosUsuario"
+        />
+        <div>
+            <input type="submit" value="Enviar">
+        </div>
+    </form>
+  </body>
+</html>
