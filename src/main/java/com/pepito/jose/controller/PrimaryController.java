@@ -1,8 +1,5 @@
 package com.pepito.jose.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +21,7 @@ public class PrimaryController {
 
     // @Autowired
     // @Qualifier("retUsuario")
-    // private Usuario usuario;
+    private Usuario usuario;
 
     @Autowired
     private Factura factura;
@@ -38,13 +35,30 @@ public class PrimaryController {
     public String index(Model model) {
         Producto producto = new Producto("Cafe", 1, 20.2);
         model.addAttribute("producto", producto);
-        // model.addAttribute("usuario",usuario);
+        model.addAttribute("usuario", usuario);
         model.addAttribute("factura", factura);
         return "index";
     }
 
     @GetMapping("/formulario")
     public String formulario(Model model) {
+        // Al mostrar por primera vez el formulario (GET), añadimos un objeto Usuario
+        // vacío al modelo.
+        // Esto asegura que Thymeleaf pueda enlazar los campos del formulario a las
+        // propiedades del objeto,
+        // incluso antes de que el usuario envíe datos.
+        //
+        // HTTP es sin estado, por lo que cada request es independiente.
+        // Si tras un POST con errores de validación volvemos a renderizar el
+        // formulario,
+        // debemos reenviar al modelo el objeto Usuario con los datos introducidos para
+        // evitar que
+        // los campos aparezcan vacíos. De lo contrario, los valores escritos se
+        // perderán al recargar la vista.
+
+        Usuario usuario = new Usuario();
+        model.addAttribute(usuario);
+
         return "formulario";
     }
 
@@ -77,15 +91,19 @@ public class PrimaryController {
     // automatica tras tener una clase u objeto la anotacion @Valid, pero tiene una
     // restriccion que es muy importante que se respete. El BindingResult debe de
     // estar SIEMPRE tras @Valid
+
+    //Para proporcionar un alias a la clase podemos utilizar @ModelAttribute("usuario")
     @PostMapping("/formulario")
     public String procFormulario(@Valid Usuario usuario, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            Map<String,String> errores = new HashMap<>();
-            result.getFieldErrors().forEach( error ->{
-                errores.put(error.getField(), "El campo ".concat(error.getField()).concat(" ").concat(error.getDefaultMessage()));
-            });
-            model.addAttribute("error", errores);
+            // Esto ya se esta haciendo automaticamente con BindingResult por lo que es innecesario especificar esto
+            // Map<String, String> errores = new HashMap<>();
+            // result.getFieldErrors().forEach(error -> {
+            //     errores.put(error.getField(),
+            //             "El campo ".concat(error.getField()).concat(" ").concat(error.getDefaultMessage()));
+            // });
+            // model.addAttribute("error", errores);
             return "formulario";
         }
 

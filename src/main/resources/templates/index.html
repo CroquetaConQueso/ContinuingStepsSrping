@@ -24,7 +24,8 @@
     </div>
     <div th:if="${usuario != null}">
       <h1>Datos Usuario</h1>
-      <p th:text="${'El nombre del usuario:' + usuario.nombreUsuario}"></p>
+      <p th:text="${'El nombre del usuario:' + usuario.nameUsuario}"></p>
+      <p th:text="${'El apellido del usuario:' + usuario.surnameUsuario}"></p>
       <p th:text="${'El id del usuario:' + usuario.idUsuario}"></p>
       <p th:text="${'Los fondos del usuario: '+ usuario.fondosUsuario}"></p>
     </div>
@@ -37,6 +38,7 @@
           <tr>
             <th>Descripcion</th>
             <th>Nombre Usuario</th>
+            <th>Apellido Usuario</th>
             <th>ID Usuario</th>
             <th>Fondos Usuario</th>
           </tr>
@@ -44,8 +46,10 @@
         <tbody>
           <tr>
             <td th:text="${factura.facturaDescripcion}"></td>
-            <td th:text="${factura.usuario.nombreUsuario}"></td>
+            <td th:text="${factura.usuario.nameUsuario}"></td>
+            <td th:text="${factura.usuario.surnameUsuario}"></td>
             <td th:text="${factura.usuario.idUsuario}"></td>
+            <td th:text="${factura.usuario.fondosUsuario}"></td>
           </tr>
         </tbody>
         <thead>
@@ -53,7 +57,7 @@
             <th>Nombre Del Producto:</th>
             <th>ID:</th>
             <th>Precio Del Producto:</th>
-            <th>Cantidad Del Producto:</th>
+            <th>Cantidad:</th>
           </tr>
         </thead>
         <tbody>

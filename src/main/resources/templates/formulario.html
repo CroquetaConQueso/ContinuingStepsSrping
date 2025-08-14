@@ -6,34 +6,47 @@
   </head>
   <body>
     <!--Para establecer que los datos van a ser tomados se ha de establecer th:action en el form. Especificando tambien que tipo de metodo va a ser(get,post,..)-->
-    <form th:action="@{/formulario}" method="post">
+    <!--Al establecer el th:object con usuario se puede mapear los valores a la clase pojo, en este caso a Usuario-->
+    <form th:action="@{/formulario}" th:object="${usuario}" method="post">
       <div>
         <h1>Formulario</h1>
         <label for="nameUsuario">Nombre de Usuario</label>
         <div>
+        <!--Para que no borre los datos que estamos enviando , debemos de establecer un value en el input, ya que si ocurre un error borraria todo(resetearia todo)-->
         <input
-          name="nameUsuario"
           type="text"
           placeholder="Introduzca el nombre.."
           id="nameUsuario"
+          th:field="*{nameUsuario}"
         />
+        <!--Las referencias al th:object son con un * en vez de con un $-->
         </div>
-        <!--Cuando queremos buscar el valor , debemos de recordar que es por la id la cual el objeto es reconocido-->
-        <div th:if="${error != null && error.containsKey('nameUsuario')}">
+        <!--Cuando queremos buscar el valor , debemos de recordar que es por la id la cual el objeto es reconocido.
+        Al tener la anotacion @Valid, la clase volverá a ser pasada automáticamente. Por lo que podriamos volver el valor en el input tras este haya tomado o intentado tomar uno-->
+        
+        <!--Anteriormente el control de errores que tenia establecido necesitaba el paso del hashmap y 
+        del tipo de error, si este tenia un valor el if se usaba pero existe una maneña en el que thymeleaf y 
+        springboot en general automatiza esto. Por lo que el if de abajo va a ser comentado-->
+        
+        <!-- <div th:if="${error != null && error.containsKey('nameUsuario')}">
           <p th:text="${error.get('nameUsuario')}"></p>
-        </div>
+        </div> 
+        
+        Y va a ser cambiado por:
+        una referencia a fields con una referencia de uso # a un plural de errores y un th:errors el cual tiene una referencia al th:object-->
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
       </div>
       <div>
         <label for="surnameUsuario">Appellido del Usuario</label>
         <div>
         <input
-          name="surnameUsuario"
           type="text"
           placeholder="Introduzca los apellidos.."
           id="surnameUsuario"
+          th:field="*{surnameUsuario}"
         />
       </div>
-      <div th:if="${error != null && error.containsKey('surnameUsuario')}" th:text="${error.surnameUsuario}"></div>
+      <div th:if="${#fields.hasErrors('surnameUsuario')}" th:errors="${*surnameUsuario}"></div>
       </div>
       <div>
         <label for="passwordUsuario">Contraseña del Usuario</label>
@@ -45,7 +58,7 @@
           id="passwordUsuario"
         />
         </div>
-        <div th:if="${error != null && error.containsKey('passwordUsuario')}" th:text="${error.passwordUsuario}"></div>
+        <div th:if="${#fields.hasErrors('passwordUsuario')}" th:errors="${*passwordUsuario}"></div>
       </div>
       <div>
         <label for="idUsuario">ID del Usuario</label>
