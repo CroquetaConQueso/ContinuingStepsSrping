@@ -46,21 +46,21 @@
           th:field="*{surnameUsuario}"
         />
       </div>
-      <div th:if="${#fields.hasErrors('surnameUsuario')}" th:errors="${*surnameUsuario}"></div>
+      <div th:if="${#fields.hasErrors('surnameUsuario')}" th:errors="*{surnameUsuario}"></div>
       </div>
       <div>
         <label for="passwordUsuario">Contraseña del Usuario</label>
         <div>
         <input
-          name="passwordUsuario"
           type="password"
           placeholder="Introduzca la contraseña.."
           id="passwordUsuario"
+          th:field="*{passwordUsuario}"
         />
         </div>
-        <div th:if="${#fields.hasErrors('passwordUsuario')}" th:errors="${*passwordUsuario}"></div>
+        <div th:if="${#fields.hasErrors('passwordUsuario')}" th:errors="*{passwordUsuario}"></div>
       </div>
-      <div>
+      <!-- <div>
         <label for="idUsuario">ID del Usuario</label>
         <div>
         <input
@@ -80,7 +80,7 @@
           placeholder="Introduzca los fondos.."
           id="fondosUsuario"
         />
-        </div>
+        </div> -->
         <div>
             <input type="submit" value="Enviar">
         </div>
