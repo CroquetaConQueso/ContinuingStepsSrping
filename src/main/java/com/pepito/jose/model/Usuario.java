@@ -21,6 +21,8 @@ public class Usuario {
     private String surnameUsuario;
     @NotEmpty
     private String passwordUsuario;
+    @NotEmpty
+    private String emailUsuario;
     private int idUsuario;
     private double fondosUsuario;
 }

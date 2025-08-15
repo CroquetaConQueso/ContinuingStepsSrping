@@ -57,6 +57,10 @@ public class PrimaryController {
         // perderán al recargar la vista.
 
         Usuario usuario = new Usuario();
+        usuario.setEmailUsuario("carlos@fuengirola1.es");
+
+        //Este valor se va a enviar a el metodo de usuario y pese a que lo tenga prestablecido con un valor, este valor se pierde.
+        usuario.setIdUsuario(1);
         model.addAttribute(usuario);
 
         return "formulario";
