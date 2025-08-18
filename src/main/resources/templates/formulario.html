@@ -81,18 +81,19 @@
         </div>
         <div th:if="${#fields.hasErrors('emailUsuario')}" th:errors="*{emailUsuario}"></div>
       </div>
-      <!-- <div>
+      <div>
         <label for="idUsuario">ID del Usuario</label>
         <div>
         <input
-          name="idUsuario"
-          type="number"
+          type="text"
           placeholder="Introduzca el ID de usuario.."
           id="idUsuario"
+          th:field="*{idUsuario}"
         />
         </div>
+        <div th:if="${#fields.hasErrors('idUsuario')}" th:errors="*{idUsuario}"></div>
       </div>
-      <div>
+      <!-- <div>
         <div>
         <label for="fondosUsuario">Fondos del Usuario</label>
         <input

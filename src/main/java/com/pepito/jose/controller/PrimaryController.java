@@ -71,7 +71,7 @@ public class PrimaryController {
 
         // Este valor se va a enviar a el metodo de usuario y pese a que lo tenga
         // prestablecido con un valor, este valor se pierde.
-        usuario.setIdUsuario(1);
+        usuario.setIdUsuario("1");
         usuario.setFondosUsuario(3000.1);
         model.addAttribute(usuario);
 
