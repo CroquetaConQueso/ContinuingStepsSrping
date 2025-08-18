@@ -25,12 +25,18 @@ public class UsuarioValidador implements Validator {
     public void validate(Object target, Errors errors) {
         Usuario usuario = (Usuario)target;
 
-        ValidationUtils.rejectIfEmpty(errors, "passwordUsuario", "usuario.passwordUsuario");
+        validarPass(usuario, errors);
+    }
 
-        if(usuario.getPasswordUsuario().isEmpty()){
-            errors.rejectValue("passwordUsuario", "usuario.passwordUsuario");
-        }else if(usuario.getPasswordUsuario().matches("[0-9]{9}") == false){
-            errors.rejectValue("passwordUsuario", "pattern.usuario.passwordUsuario");
+    private void validarPass(Usuario u, Errors e){
+        ValidationUtils.rejectIfEmptyOrWhitespace(e, "passwordUsuario", "usuario.passwordUsuario");
+
+        if(u.getPasswordUsuario().isEmpty()){
+            e.rejectValue("passwordUsuario", "usuario.passwordUsuario");
+        }else if(u.getPasswordUsuario().matches("[0-9]{9}")== false){
+            e.rejectValue("passwordUsuario", "pattern.usuario.passwordUsuario");
+        }else if(u.getPasswordUsuario().length()<5 || u.getPasswordUsuario().length()>12){
+            e.rejectValue("passwordUsuario", "pattern.usuario.passwordUsuario");
         }
     }
 
