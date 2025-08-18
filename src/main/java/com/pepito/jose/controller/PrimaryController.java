@@ -11,6 +11,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.pepito.jose.model.Factura;
 import com.pepito.jose.model.Producto;
 import com.pepito.jose.model.Usuario;
+import com.pepito.jose.validators.UsuarioValidador;
 
 import jakarta.validation.Valid;
 
@@ -29,6 +30,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/")
 public class PrimaryController {
 
+    @Autowired
+    private UsuarioValidador validador;
     // @Autowired
     // @Qualifier("retUsuario")
     private Usuario usuario;
@@ -113,6 +116,7 @@ public class PrimaryController {
     @PostMapping("/formulario")
     public String procFormulario(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
 
+        validador.validate(usuario, result);
         if (result.hasErrors()) {
             // Esto ya se esta haciendo automaticamente con BindingResult por lo que es
             // innecesario especificar esto

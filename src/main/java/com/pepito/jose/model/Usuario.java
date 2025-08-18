@@ -25,7 +25,6 @@ public class Usuario {
     private String nameUsuario;
     @NotEmpty
     private String surnameUsuario;
-    @NotEmpty
     private String passwordUsuario;
     @NotEmpty
     @Email(message="correo con formato incorrecto")
