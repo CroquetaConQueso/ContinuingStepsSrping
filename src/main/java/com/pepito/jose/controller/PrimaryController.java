@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.pepito.jose.model.Factura;
 import com.pepito.jose.model.Producto;
@@ -16,6 +18,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+// Si queremos que el atributo entity, el cual no esta mapeado persista(estamos
+// hablando del atributo el cual no tiene un @NotEmpty), ni se encuentra en el
+// formulario. Estos, son poblados en el usuario y se envian desde este,
+// haciendo que todos los atributos que no esten en el formulario sean
+// establecidos como null. Añadirlos porque si no es una opción ya que es un
+// atributo que el usuario no debe de ver. Para esto usamos SessionAttributes, guardandolos en una session http
+// dando el nombre del objeto. Teniendo que limpiarlo luego tras haberse usado en la base de datos o el formulario en si
+@SessionAttributes("usuario")
 @RequestMapping("/")
 public class PrimaryController {
 
@@ -59,8 +69,10 @@ public class PrimaryController {
         Usuario usuario = new Usuario();
         usuario.setEmailUsuario("carlos@fuengirola1.es");
 
-        //Este valor se va a enviar a el metodo de usuario y pese a que lo tenga prestablecido con un valor, este valor se pierde.
+        // Este valor se va a enviar a el metodo de usuario y pese a que lo tenga
+        // prestablecido con un valor, este valor se pierde.
         usuario.setIdUsuario(1);
+        usuario.setFondosUsuario(3000.1);
         model.addAttribute(usuario);
 
         return "formulario";
@@ -96,16 +108,19 @@ public class PrimaryController {
     // restriccion que es muy importante que se respete. El BindingResult debe de
     // estar SIEMPRE tras @Valid
 
-    //Para proporcionar un alias a la clase podemos utilizar @ModelAttribute("usuario")
+    // Para proporcionar un alias a la clase podemos utilizar
+    // @ModelAttribute("usuario")
     @PostMapping("/formulario")
-    public String procFormulario(@Valid Usuario usuario, BindingResult result, Model model) {
+    public String procFormulario(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
 
         if (result.hasErrors()) {
-            // Esto ya se esta haciendo automaticamente con BindingResult por lo que es innecesario especificar esto
+            // Esto ya se esta haciendo automaticamente con BindingResult por lo que es
+            // innecesario especificar esto
             // Map<String, String> errores = new HashMap<>();
             // result.getFieldErrors().forEach(error -> {
-            //     errores.put(error.getField(),
-            //             "El campo ".concat(error.getField()).concat(" ").concat(error.getDefaultMessage()));
+            // errores.put(error.getField(),
+            // "El campo ".concat(error.getField()).concat("
+            // ").concat(error.getDefaultMessage()));
             // });
             // model.addAttribute("error", errores);
             return "formulario";
@@ -114,6 +129,8 @@ public class PrimaryController {
         model.addAttribute("usuario", usuario);
         // Se establece un html, y cuando estos datos sean tomado, se mostraran en la
         // pagina de resultado
+
+        status.setComplete(); //Se limpia el objeto usuario de la @SessionAttributes
         return "resultado";
     }
 
