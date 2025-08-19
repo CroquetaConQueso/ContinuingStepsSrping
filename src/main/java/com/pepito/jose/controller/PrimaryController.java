@@ -15,7 +15,9 @@ import com.pepito.jose.validators.UsuarioValidador;
 
 import jakarta.validation.Valid;
 
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -24,16 +26,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 // formulario. Estos, son poblados en el usuario y se envian desde este,
 // haciendo que todos los atributos que no esten en el formulario sean
 // establecidos como null. Añadirlos porque si no es una opción ya que es un
-// atributo que el usuario no debe de ver. Para esto usamos SessionAttributes, guardandolos en una session http
-// dando el nombre del objeto. Teniendo que limpiarlo luego tras haberse usado en la base de datos o el formulario en si
+// atributo que el usuario no debe de ver. Para esto usamos SessionAttributes,
+// guardandolos en una session http
+// dando el nombre del objeto. Teniendo que limpiarlo luego tras haberse usado
+// en la base de datos o el formulario en si
 @SessionAttributes("usuario")
 @RequestMapping("/")
 public class PrimaryController {
-
+    
     @Autowired
     private UsuarioValidador validador;
+
     // @Autowired
     // @Qualifier("retUsuario")
+    
+    // Para automatizar la clase validadora , se debe de establecer un @InitBinder.
+    // Esto nos permitira quitar la instanciacion del metodo y permitir hacerlo todo
+    // mas limpio ya que se automatizará mediante la anotacion @valid
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.setValidator(validador);
+    }
     private Usuario usuario;
 
     @Autowired
@@ -116,7 +130,8 @@ public class PrimaryController {
     @PostMapping("/formulario")
     public String procFormulario(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
 
-        validador.validate(usuario, result);
+        //Ya no es necesario al establecer el InitBinder
+        // validador.validate(usuario, result);
         if (result.hasErrors()) {
             // Esto ya se esta haciendo automaticamente con BindingResult por lo que es
             // innecesario especificar esto
@@ -134,7 +149,7 @@ public class PrimaryController {
         // Se establece un html, y cuando estos datos sean tomado, se mostraran en la
         // pagina de resultado
 
-        status.setComplete(); //Se limpia el objeto usuario de la @SessionAttributes
+        status.setComplete(); // Se limpia el objeto usuario de la @SessionAttributes
         return "resultado";
     }
 
