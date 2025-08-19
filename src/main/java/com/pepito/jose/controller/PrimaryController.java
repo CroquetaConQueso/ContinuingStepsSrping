@@ -33,21 +33,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 @SessionAttributes("usuario")
 @RequestMapping("/")
 public class PrimaryController {
-    
+
     @Autowired
     private UsuarioValidador validador;
 
     // @Autowired
     // @Qualifier("retUsuario")
-    
+
     // Para automatizar la clase validadora , se debe de establecer un @InitBinder.
     // Esto nos permitira quitar la instanciacion del metodo y permitir hacerlo todo
     // mas limpio ya que se automatizará mediante la anotacion @valid
 
     @InitBinder
-    public void initBinder(WebDataBinder binder){
-        binder.setValidator(validador);
+    public void initBinder(WebDataBinder binder) {
+        // Al establecer un set estamos reemplazondo el validador por defecto con el
+        // validador que hemos pasado, por lo que se pierde todas las anteriores
+        // anotaciones que se hayan establecido con anterioridad. Para esto vamos a utilizar addValidators
+        binder.addValidators(validador);
     }
+
     private Usuario usuario;
 
     @Autowired
@@ -130,7 +134,7 @@ public class PrimaryController {
     @PostMapping("/formulario")
     public String procFormulario(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
 
-        //Ya no es necesario al establecer el InitBinder
+        // Ya no es necesario al establecer el InitBinder
         // validador.validate(usuario, result);
         if (result.hasErrors()) {
             // Esto ya se esta haciendo automaticamente con BindingResult por lo que es
