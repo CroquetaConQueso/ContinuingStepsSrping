@@ -13,7 +13,7 @@ public class ApellidoValidador implements ConstraintValidator<ApellidoValido,Str
             return false;
         }
         
-        return value.matches("[A-Z][a-z]+[ ]?[A-Z]?[a-z]+");
+        return value.matches("^[A-Z][a-z]+(?: [A-Z][a-z]+)?$");
     }
     
 }

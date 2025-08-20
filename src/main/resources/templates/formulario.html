@@ -40,7 +40,7 @@
         ></div>
       </div>
       <div>
-        <label for="surnameUsuario">Appellido del Usuario</label>
+        <label for="surnameUsuario">Apellido del Usuario</label>
         <div>
           <input
             type="text"
@@ -53,6 +53,21 @@
           th:if="${#fields.hasErrors('surnameUsuario')}"
           th:errors="*{surnameUsuario}"
         ></div>
+      </div>
+      <div>
+        <label for="edadUsuario">Edad del Usuario</label>
+        <div>
+          <!--Si se establece como type="number", la validacion ocurre en el navegador y no en el servidor spring.-->
+          <input type="text" placeholder="Introduzca la edad.." id="edadUsuario" th:field="*{edadUsuario}"/>
+        </div>
+        <div th:if="${#fields.hasErrors('edadUsuario')}" th:errors="*{edadUsuario}"></div>
+      </div>
+      <div>
+        <label for="fechaNacimientoUsuario">Fecha de Nacimiento del Usuario</label>
+        <div>
+          <input type="text" id="fechaNacimientoUsuario" th:field="*{fechaNacimientoUsuario}"/>
+        </div>
+        <div th:if="${#fields.hasErrors('fechaNacimientoUsuario')}" th:errors="*{fechaNacimientoUsuario}"></div>
       </div>
       <div>
         <label for="passwordUsuario">Contraseña del Usuario</label>
