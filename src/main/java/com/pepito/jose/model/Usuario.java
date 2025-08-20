@@ -2,6 +2,8 @@ package com.pepito.jose.model;
 
 import org.springframework.stereotype.Component;
 
+import com.pepito.jose.validators.ApellidoValido;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -23,7 +25,7 @@ public class Usuario {
     //Para establecer que tipo de prompt vamos a tener como respuesta tras el error podemos usar message = para establecer uno
     @Size(min=3, max=8, message = "El nombre debe de tener entre 3 y 8 caracteres")
     private String nameUsuario;
-    @NotEmpty
+    @ApellidoValido
     private String surnameUsuario;
     private String passwordUsuario;
     @NotEmpty
