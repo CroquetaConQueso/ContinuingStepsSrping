@@ -33,7 +33,7 @@ public class UsuarioValidador implements Validator {
 
         if(u.getPasswordUsuario().isEmpty()){
             e.rejectValue("passwordUsuario", "usuario.passwordUsuario");
-        }else if(u.getPasswordUsuario().matches("[0-9]{9}")== false){
+        }else if(u.getPasswordUsuario().matches("[0-9]{9}[-][A-Z]")== false){
             e.rejectValue("passwordUsuario", "pattern.usuario.passwordUsuario");
         }else if(u.getPasswordUsuario().length()<5 || u.getPasswordUsuario().length()>12){
             e.rejectValue("passwordUsuario", "pattern.usuario.passwordUsuario");
