@@ -1,7 +1,6 @@
 package com.pepito.jose.model;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 import com.pepito.jose.validators.ApellidoValido;
@@ -50,7 +49,7 @@ public class Usuario {
     @Max(500)
     private Integer edadUsuario;
     @NotNull
-    private Date fechaNacimientoUsuario;
+    private LocalDate fechaNacimientoUsuario;
     private String passwordUsuario;
     @NotEmpty
     @Email(message = "correo con formato incorrecto")
