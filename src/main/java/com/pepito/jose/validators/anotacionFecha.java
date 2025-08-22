@@ -10,10 +10,10 @@ import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 @Documented
-@Constraint(validatedBy = fechaValidador.class)
+@Constraint(validatedBy = FechaValidador.class)
 @Target({ ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface anotacionFecha {
+public @interface AnotacionFecha {
 
     String message() default "{usuario.fechaNacimiento}";
 

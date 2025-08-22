@@ -1,5 +1,7 @@
 package com.pepito.jose.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.pepito.jose.editor.NombreMayusculaEditor;
 import com.pepito.jose.model.Factura;
 import com.pepito.jose.model.Producto;
 import com.pepito.jose.model.Usuario;
@@ -18,6 +21,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -50,6 +54,16 @@ public class PrimaryController {
         // validador que hemos pasado, por lo que se pierde todas las anteriores
         // anotaciones que se hayan establecido con anterioridad. Para esto vamos a utilizar addValidators
         binder.addValidators(validador);
+
+        
+        // Al establecer esto se definira sobre todas las clases de tipo String 
+
+        // Registramos un editor de propiedades para todos los campos de tipo String
+        // Esto significa que antes de hacer el data binding (copiar valores del formulario al objeto),
+        // cualquier String pasará por NombreMayusculaEditor, el cual lo transformará a MAYÚSCULAS y quitará espacios.
+        // Útil para normalizar entradas de texto (ej: nombres propios, códigos, etc.)
+    
+        binder.registerCustomEditor(String.class,"nombreUsuario" ,new NombreMayusculaEditor());
     }
 
     private Usuario usuario;
@@ -157,4 +171,9 @@ public class PrimaryController {
         return "resultado";
     }
 
+    @ModelAttribute("paises")
+    public List<String> paises(){
+        return List.of("Egipto","España","Francia","Chile","Mexico");
+        
+    }
 }

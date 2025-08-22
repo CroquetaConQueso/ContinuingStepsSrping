@@ -3,6 +3,7 @@ package com.pepito.jose.model;
 import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
+import com.pepito.jose.validators.AnotacionFecha;
 import com.pepito.jose.validators.ApellidoValido;
 
 import jakarta.validation.constraints.Email;
@@ -48,7 +49,7 @@ public class Usuario {
     @Min(10)
     @Max(500)
     private Integer edadUsuario;
-    @NotNull
+    @AnotacionFecha
     private LocalDate fechaNacimientoUsuario;
     private String passwordUsuario;
     @NotEmpty
@@ -59,4 +60,6 @@ public class Usuario {
     @Pattern(regexp = "[0-9]{2}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
     private String idUsuario;
     private double fondosUsuario;
+    @NotEmpty
+    private String paisUsuario;
 }

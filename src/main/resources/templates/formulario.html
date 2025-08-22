@@ -65,7 +65,7 @@
       <div>
         <label for="fechaNacimientoUsuario">Fecha de Nacimiento del Usuario</label>
         <div>
-          <input type="text" id="fechaNacimientoUsuario" th:field="*{fechaNacimientoUsuario}"/>
+          <input type="date" id="fechaNacimientoUsuario" th:field="*{fechaNacimientoUsuario}"/>
         </div>
         <div th:if="${#fields.hasErrors('fechaNacimientoUsuario')}" th:errors="*{fechaNacimientoUsuario}"></div>
       </div>
@@ -107,6 +107,20 @@
         />
         </div>
         <div th:if="${#fields.hasErrors('idUsuario')}" th:errors="*{idUsuario}"></div>
+      </div>
+      <div>
+        <label for="paisUsuario">Pais del Usuario</label>
+        <div>
+        <select
+          id="paisUsuario"
+          th:field="*{paisUsuario}"
+        >
+        <!--Así es como se establece un valor por defecto en una opcion-->
+        <option value="">--Seleccione el pais--</option>
+        <option th:each="paisUsuario: ${paises}" th:text="${paisUsuario}" th:value="${paisUsuario}"></option>
+        </select>
+        </div>
+        <div th:if="${#fields.hasErrors('paisUsuario')}" th:errors="*{paisUsuario}"></div>
       </div>
       <!-- <div>
         <div>

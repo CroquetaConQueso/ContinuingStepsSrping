@@ -33,7 +33,7 @@ public class AppConfig {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate fecha = LocalDate.parse("2025/03/15", formatter);
         
-        Usuario usuario = new Usuario("Jose","Perez",1,fecha,"1234","wawa@hotmail.com", "1", 200.2);
+        Usuario usuario = new Usuario("Jose","Perez",1,fecha,"1234","wawa@hotmail.com", "1", 200.2,"Venezuela ");
         return usuario;
     }
 
