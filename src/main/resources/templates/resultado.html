@@ -2,20 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Resultado    </title>
+    <title>Resultado</title>
   </head>
   <body>
+    <!--
+🔹 Expresiones Thymeleaf principales:
+
+    1) ${...}  -> Variable Expression
+      - Accede a valores del modelo (atributos añadidos con model.addAttribute()).
+      - Ejemplo: ${usuario.nombre}  -> obtiene el nombre del usuario.
+
+    2) *{...}  -> Selection Variable Expression
+      - Relativo al objeto definido con th:object.
+      - Útil en formularios para simplificar la escritura.
+      - Ejemplo:
+          <form th:object="${usuario}">
+              <input th:field="*{nombre}" /> // equivale a ${usuario.nombre}
+
+    3) #{...}  -> Message Expression (i18n)
+      - Busca cadenas en messages.properties para internacionalización.
+      - Ejemplo: #{usuario.nombre} -> "Nombre de usuario" (según el properties)
+
+    4) @{...}  -> URL Expression
+      - Construye URLs relativas al contexto de la app.
+      - Ejemplo: @{/usuarios/{id}(id=${usuario.id})} -> "/usuarios/5"
+
+    5) ~{...}  -> Fragment Expression
+      - Inserta fragmentos (templates parciales).
+      - Ejemplo: ~{fragments/header :: navbar} -> incluye el fragmento "navbar"
+
+    📌 Extra útil:
+    - #dates   -> Utilidades para java.util.Date y Calendar (format, createNow, etc.)
+    - #temporals -> Utilidades para java.time.* (LocalDate, LocalDateTime, etc.)
+       -->
+
     <div>
-        <h1>Resultado del Formulario</h1>
-        <ul>
-            <li>Nombre de Usuario: <span th:text="${usuario.nameUsuario}"></span></li>
-            <li>Apellido: <span th:text="${usuario.surnameUsuario}"></span></li>
-            <li>Edad: <span th:text="${usuario.edadUsuario}"></span></li>
-            <li>Contraseña: <span th:text="${usuario.passwordUsuario}"></span></li>
-            <li>Email: <span th:text="${usuario.emailUsuario}"></span></li>
-            <li>ID Usuario: <span th:text="${usuario.idUsuario}"></span></li>
-            <li>Fondos: <span th:text="${usuario.fondosUsuario}"></span></li>
-        </ul>
+      <h1>Resultado del Formulario</h1>
+      <ul>
+        <li>
+          Nombre de Usuario: <span th:text="${usuario.nameUsuario}"></span>
+        </li>
+        <li>Apellido: <span th:text="${usuario.surnameUsuario}"></span></li>
+        <li>Edad: <span th:text="${usuario.edadUsuario}"></span></li>
+        <li>Contraseña: <span th:text="${usuario.passwordUsuario}"></span></li>
+        <li>Email: <span th:text="${usuario.emailUsuario}"></span></li>
+        <li>ID Usuario: <span th:text="${usuario.idUsuario}"></span></li>
+        <li>Fondos: <span th:text="${usuario.fondosUsuario}"></span></li>
+        <!--Actualmente la fecha es mostrada con el formato americano, para poder cambiarlo debemos 
+        de utilizar un método. En este caso, vamos a utilizar una de las funciones encontradas en thymeleaf
+         para organizar de mejor manera este formato-->
+        <li>
+          Fecha De Nacimiento:
+          <span
+            th:text="${#temporals.format(usuario.fechaNacimientoUsuario, 'dd/MM/yyyy')}"
+          ></span>
+        </li>
+        <li>Pais: <span th:text="${usuario.paisUsuario}"></span></li>
+      </ul>
     </div>
   </body>
 </html>

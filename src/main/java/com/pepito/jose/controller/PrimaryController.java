@@ -63,7 +63,7 @@ public class PrimaryController {
         // cualquier String pasará por NombreMayusculaEditor, el cual lo transformará a MAYÚSCULAS y quitará espacios.
         // Útil para normalizar entradas de texto (ej: nombres propios, códigos, etc.)
     
-        binder.registerCustomEditor(String.class,"nombreUsuario" ,new NombreMayusculaEditor());
+        binder.registerCustomEditor(String.class,"nameUsuario" ,new NombreMayusculaEditor());
     }
 
     private Usuario usuario;
@@ -106,6 +106,7 @@ public class PrimaryController {
 
         // Este valor se va a enviar a el metodo de usuario y pese a que lo tenga
         // prestablecido con un valor, este valor se pierde.
+        usuario.setNameUsuario("Gilito");
         usuario.setIdUsuario("1");
         usuario.setFondosUsuario(3000.1);
         model.addAttribute(usuario);
