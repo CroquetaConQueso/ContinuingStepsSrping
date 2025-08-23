@@ -117,7 +117,7 @@
         >
         <!--Así es como se establece un valor por defecto en una opcion-->
         <option value="">--Seleccione el pais--</option>
-        <option th:each="paisUsuario: ${paises}" th:text="${paisUsuario}" th:value="${paisUsuario}"></option>
+        <option th:each="paisUsuario: ${paisesMap.entrySet}" th:text="${paisUsuario.value}" th:value="${paisUsuario.key}"></option>
         </select>
         </div>
         <div th:if="${#fields.hasErrors('paisUsuario')}" th:errors="*{paisUsuario}"></div>

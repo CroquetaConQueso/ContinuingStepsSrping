@@ -1,6 +1,8 @@
 package com.pepito.jose.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.pepito.jose.editor.NombreMayusculaEditor;
 import com.pepito.jose.model.Factura;
+import com.pepito.jose.model.Pais;
 import com.pepito.jose.model.Producto;
 import com.pepito.jose.model.Usuario;
 import com.pepito.jose.validators.UsuarioValidador;
@@ -176,5 +179,18 @@ public class PrimaryController {
     public List<String> paises(){
         return List.of("Egipto","España","Francia","Chile","Mexico");
         
+    }
+
+    @ModelAttribute("paisesMap")
+    public Map<String,Pais> paisesMapa(){
+        Map<String,Pais> mapPaises = new HashMap<>();
+        mapPaises.put("EG", new Pais(1,"Egipto"));
+        mapPaises.put("ES", new Pais(2,"España"));
+        mapPaises.put("FR", new Pais(3,"Francia"));
+        mapPaises.put("CH", new Pais(4,"Chile"));
+        mapPaises.put("ME", new Pais(5,"Mexico"));
+
+
+        return mapPaises;
     }
 }
