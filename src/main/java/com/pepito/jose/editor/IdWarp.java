@@ -1,9 +1,11 @@
 package com.pepito.jose.editor;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import com.pepito.jose.model.Pais;
 
+@Component
 public class IdWarp implements Converter<String,Pais>{
     @Override
     public Pais convert(String arg0) {
