@@ -60,6 +60,5 @@ public class Usuario {
     @Pattern(regexp = "[0-9]{2}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
     private String idUsuario;
     private double fondosUsuario;
-    @NotEmpty
-    private String paisUsuario;
+    private Pais paisUsuario;
 }

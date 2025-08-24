@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.pepito.jose.model.ItemFactura;
+import com.pepito.jose.model.Pais;
 import com.pepito.jose.model.Producto;
 import com.pepito.jose.model.Usuario;
 
@@ -33,7 +34,7 @@ public class AppConfig {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate fecha = LocalDate.parse("2025/03/15", formatter);
         
-        Usuario usuario = new Usuario("Jose","Perez",1,fecha,"1234","wawa@hotmail.com", "1", 200.2,"Venezuela ");
+        Usuario usuario = new Usuario("Jose","Perez",1,fecha,"1234","wawa@hotmail.com", "1", 200.2,new Pais(2,"España"));
         return usuario;
     }
 
