@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.pepito.jose.validators.AnotacionFecha;
 import com.pepito.jose.validators.ApellidoValido;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -60,5 +61,6 @@ public class Usuario {
     @Pattern(regexp = "[0-9]{2}[.][0-9]{3}[.][0-9]{3}[-][A-Z]{1}")
     private String idUsuario;
     private double fondosUsuario;
+    @Valid
     private Pais paisUsuario;
 }

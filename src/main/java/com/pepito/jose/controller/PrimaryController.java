@@ -17,6 +17,7 @@ import com.pepito.jose.model.Factura;
 import com.pepito.jose.model.Pais;
 import com.pepito.jose.model.Producto;
 import com.pepito.jose.model.Usuario;
+import com.pepito.jose.services.PaisService;
 import com.pepito.jose.validators.UsuarioValidador;
 
 import jakarta.validation.Valid;
@@ -50,6 +51,9 @@ public class PrimaryController {
     // Para automatizar la clase validadora , se debe de establecer un @InitBinder.
     // Esto nos permitira quitar la instanciacion del metodo y permitir hacerlo todo
     // mas limpio ya que se automatizará mediante la anotacion @valid
+
+    @Autowired
+    private PaisService paisService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -184,13 +188,18 @@ public class PrimaryController {
     @ModelAttribute("paisesMap")
     public Map<String,Pais> paisesMapa(){
         Map<String,Pais> mapPaises = new HashMap<>();
-        mapPaises.put("EG", new Pais(1,"Egipto"));
-        mapPaises.put("ES", new Pais(2,"España"));
-        mapPaises.put("FR", new Pais(3,"Francia"));
-        mapPaises.put("CH", new Pais(4,"Chile"));
-        mapPaises.put("ME", new Pais(5,"Mexico"));
+        mapPaises.put("EG", new Pais(1,"EG","Egipto"));
+        mapPaises.put("ES", new Pais(2,"ES","España"));
+        mapPaises.put("FR", new Pais(3,"FR","Francia"));
+        mapPaises.put("CL", new Pais(4,"CH","Chile"));
+        mapPaises.put("ME", new Pais(5,"ME","Mexico"));
 
 
         return mapPaises;
+    }
+
+    @ModelAttribute("listaPaises")
+    public List<Pais> listaPaises(){
+        return paisService.Listar();
     }
 }
