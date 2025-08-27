@@ -57,8 +57,9 @@
             th:text="${#temporals.format(usuario.fechaNacimientoUsuario, 'dd/MM/yyyy')}"
           ></span>
         </li>
-        <li>Pais: <span th:text="${usuario.paisUsuario.getNombrePais}"></span></li>
         <li>Pais: <span th:text="${usuario.paisUsuario.getIdPais}"></span></li>
+        <li>Pais: <span th:text="${usuario.paisUsuario.getNombrePais}"></span></li>
+        <li>Pais: <span th:text="${usuario.paisUsuario.getAbreviacionPais}"></span></li>
       </ul>
     </div>
   </body>

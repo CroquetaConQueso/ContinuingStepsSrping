@@ -55,6 +55,9 @@ public class PrimaryController {
     @Autowired
     private PaisService paisService;
 
+    // @Autowired
+    // private PaisPropertyEditor paisPropertyEditor;
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         // Al establecer un set estamos reemplazondo el validador por defecto con el
@@ -71,6 +74,7 @@ public class PrimaryController {
         // Útil para normalizar entradas de texto (ej: nombres propios, códigos, etc.)
     
         binder.registerCustomEditor(String.class,"nameUsuario" ,new NombreMayusculaEditor());
+        //binder.registerCustomEditor(Pais.class,"pais", paisPropertyEditor);
     }
 
     private Usuario usuario;

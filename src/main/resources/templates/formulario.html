@@ -121,7 +121,7 @@
         <!--Tenemos que tener en cuenta que siempre que se tome un valor(lo cual esta igualado por th:value), este va a 
         ser el unico valor tomado. En este caso, select siempre va a devolver un String, por lo que tendremos que jugar con
          la cadena para poder dividir varios valores y tomar todos estos a hacer splits de la cadena en si-->
-        <option th:each="paisUsuario: ${paisesMap.values()}" th:text="${paisUsuario.nombrePais}" th:value="${paisUsuario.nombrePais+'-'+paisUsuario.idPais}"></option>
+        <option th:each="paisUsuario: ${listaPaises}" th:text="${paisUsuario.nombrePais}" th:value="${paisUsuario.idPais}"></option>
         </select>
         </div>
         <div th:if="${#fields.hasErrors('paisUsuario')}" th:errors="*{paisUsuario}"></div>

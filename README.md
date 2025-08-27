@@ -3,3 +3,5 @@
 <p>En messages.proprties he establecido valores de errores unicos<p>
 <p>Añadi un validador unico el cual he de acordarme de que se ha de pasar la clase como argumento para que pueda validar y ser de añoyo en el controlador del formulario<p>
 <p>Se puede automatizar el controlador y no tener que añadirlo mediante validador.validate(usuario,result).. en la clase (mas el atributo de la calse validadora con su respectivo autowired)<p>
+<p>Se han creado anotaciones para validar toma de valores<p>
+<p>He establecido un select y tomado valores con get, luego he tomado varios de estos para pasarlo luego a otro html que muestra los valores del resultado. También , se ha automatizado más la accion de pasar los valores mediante la creacion de una clase llamada PaisServiceImpl, la cual tenia establecida su scope con una interfaz para respetar el DIP<p>

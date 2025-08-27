@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 public class Pais {
     private Integer idPais;
     private String abreviacionPais;
-    @NotBlank
     private String nombrePais;
 }
