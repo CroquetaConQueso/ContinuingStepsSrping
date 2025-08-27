@@ -60,7 +60,16 @@
         <li>Pais: <span th:text="${usuario.paisUsuario.getIdPais}"></span></li>
         <li>Pais: <span th:text="${usuario.paisUsuario.getNombrePais}"></span></li>
         <li>Pais: <span th:text="${usuario.paisUsuario.getAbreviacionPais}"></span></li>
+        <!-- No queda bien tenerlo todo en una linea, ya que si se escoge más de un rol se obtiene: UsuarioAdministrador,..
+         <li>Rol: <span th:each="rol: ${usuario.rolesUsuario}" th:text="${rol}"></span></li>-->
       </ul>
+      <div>
+        <p>Roles</p>
+        <ul>
+          <li th:each="rol: ${usuario.rolesUsuario}" th:text="${rol}">Rol: </span></li>
+        </ul>
+      </div>
+
     </div>
   </body>
 </html>

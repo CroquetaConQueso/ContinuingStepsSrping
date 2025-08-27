@@ -206,4 +206,9 @@ public class PrimaryController {
     public List<Pais> listaPaises(){
         return paisService.Listar();
     }
+
+    @ModelAttribute("listaRolesUsuario")
+    public List<String> rolesUsuario(){
+        return List.of("Administrador","Usuario","Prueba");
+    } 
 }

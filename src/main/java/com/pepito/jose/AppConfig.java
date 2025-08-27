@@ -2,6 +2,7 @@ package com.pepito.jose;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,8 +34,11 @@ public class AppConfig {
     public Usuario retUsuario() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate fecha = LocalDate.parse("2025/03/15", formatter);
-        
-        Usuario usuario = new Usuario("Jose","Perez",1,fecha,"1234","wawa@hotmail.com", "1", 200.2,new Pais(2,"ES","España"));
+        List<String> roles = new ArrayList<>();
+
+        roles.add("Usuario");
+        roles.add("Administrador");
+        Usuario usuario = new Usuario("Jose","Perez",1,fecha,"1234","wawa@hotmail.com", "1", 200.2,new Pais(2,"ES","España"),roles);
         return usuario;
     }
 

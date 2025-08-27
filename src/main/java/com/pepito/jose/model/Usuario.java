@@ -1,6 +1,8 @@
 package com.pepito.jose.model;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.pepito.jose.validators.AnotacionFecha;
@@ -63,4 +65,6 @@ public class Usuario {
     private double fondosUsuario;
     @Valid
     private Pais paisUsuario;
+    @NotEmpty
+    private List<String> rolesUsuario;
 }

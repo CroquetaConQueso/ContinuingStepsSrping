@@ -5,3 +5,4 @@
 <p>Se puede automatizar el controlador y no tener que añadirlo mediante validador.validate(usuario,result).. en la clase (mas el atributo de la calse validadora con su respectivo autowired)<p>
 <p>Se han creado anotaciones para validar toma de valores<p>
 <p>He establecido un select y tomado valores con get, luego he tomado varios de estos para pasarlo luego a otro html que muestra los valores del resultado. También , se ha automatizado más la accion de pasar los valores mediante la creacion de una clase llamada PaisServiceImpl, la cual tenia establecida su scope con una interfaz para respetar el DIP<p>
+<p>He pasado la clase entera en vez de realizar una division por "-", tambien he usado un checkbox <p>

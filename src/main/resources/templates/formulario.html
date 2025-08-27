@@ -59,16 +59,33 @@
         <label for="edadUsuario">Edad del Usuario</label>
         <div>
           <!--Si se establece como type="number", la validacion ocurre en el navegador y no en el servidor spring.-->
-          <input type="text" placeholder="Introduzca la edad.." id="edadUsuario" th:field="*{edadUsuario}"/>
+          <input
+            type="text"
+            placeholder="Introduzca la edad.."
+            id="edadUsuario"
+            th:field="*{edadUsuario}"
+          />
         </div>
-        <div th:if="${#fields.hasErrors('edadUsuario')}" th:errors="*{edadUsuario}"></div>
+        <div
+          th:if="${#fields.hasErrors('edadUsuario')}"
+          th:errors="*{edadUsuario}"
+        ></div>
       </div>
       <div>
-        <label for="fechaNacimientoUsuario">Fecha de Nacimiento del Usuario</label>
+        <label for="fechaNacimientoUsuario"
+          >Fecha de Nacimiento del Usuario</label
+        >
         <div>
-          <input type="date" id="fechaNacimientoUsuario" th:field="*{fechaNacimientoUsuario}"/>
+          <input
+            type="date"
+            id="fechaNacimientoUsuario"
+            th:field="*{fechaNacimientoUsuario}"
+          />
         </div>
-        <div th:if="${#fields.hasErrors('fechaNacimientoUsuario')}" th:errors="*{fechaNacimientoUsuario}"></div>
+        <div
+          th:if="${#fields.hasErrors('fechaNacimientoUsuario')}"
+          th:errors="*{fechaNacimientoUsuario}"
+        ></div>
       </div>
       <div>
         <label for="passwordUsuario">Contraseña del Usuario</label>
@@ -95,36 +112,46 @@
             th:field="*{emailUsuario}"
           />
         </div>
-        <div th:if="${#fields.hasErrors('emailUsuario')}" th:errors="*{emailUsuario}"></div>
+        <div
+          th:if="${#fields.hasErrors('emailUsuario')}"
+          th:errors="*{emailUsuario}"
+        ></div>
       </div>
       <div>
         <label for="idUsuario">ID del Usuario</label>
         <div>
-        <input
-          type="text"
-          placeholder="Introduzca el ID de usuario.."
-          id="idUsuario"
-          th:field="*{idUsuario}"
-        />
+          <input
+            type="text"
+            placeholder="Introduzca el ID de usuario.."
+            id="idUsuario"
+            th:field="*{idUsuario}"
+          />
         </div>
-        <div th:if="${#fields.hasErrors('idUsuario')}" th:errors="*{idUsuario}"></div>
+        <div
+          th:if="${#fields.hasErrors('idUsuario')}"
+          th:errors="*{idUsuario}"
+        ></div>
       </div>
       <div>
         <label for="paisUsuario">Pais del Usuario</label>
         <div>
-        <select
-          id="paisUsuario"
-          th:field="*{paisUsuario}"
-        >
-        <!--Así es como se establece un valor por defecto en una opcion-->
-        <option value="">--Seleccione el pais--</option>
-        <!--Tenemos que tener en cuenta que siempre que se tome un valor(lo cual esta igualado por th:value), este va a 
+          <select id="paisUsuario" th:field="*{paisUsuario}">
+            <!--Así es como se establece un valor por defecto en una opcion-->
+            <option value="">--Seleccione el pais--</option>
+            <!--Tenemos que tener en cuenta que siempre que se tome un valor(lo cual esta igualado por th:value), este va a 
         ser el unico valor tomado. En este caso, select siempre va a devolver un String, por lo que tendremos que jugar con
          la cadena para poder dividir varios valores y tomar todos estos a hacer splits de la cadena en si-->
-        <option th:each="paisUsuario: ${listaPaises}" th:text="${paisUsuario.nombrePais}" th:value="${paisUsuario.idPais}"></option>
-        </select>
+            <option
+              th:each="paisUsuario: ${listaPaises}"
+              th:text="${paisUsuario.nombrePais}"
+              th:value="${paisUsuario.idPais}"
+            ></option>
+          </select>
         </div>
-        <div th:if="${#fields.hasErrors('paisUsuario')}" th:errors="*{paisUsuario}"></div>
+        <div
+          th:if="${#fields.hasErrors('paisUsuario')}"
+          th:errors="*{paisUsuario}"
+        ></div>
       </div>
       <!-- <div>
         <div>
@@ -136,6 +163,25 @@
           id="fondosUsuario"
         />
         </div> -->
+
+      <div>
+        <label>Rol Del Usuario</label>
+        <!--Para hacer un for de un checkbox se debe de hacer con aterioridad comparado con por ejemplo un select y en un div en vez de en un option-->
+        <div th:each="rol: ${listaRolesUsuario}">
+          <input type="checkbox" th:field="*{rolesUsuario}" th:value="${rol}" />
+          <!--
+          th:for NO itera; lo que hace es establecer dinámicamente el atributo "for" del <label>.
+          En este caso se usa junto con #ids.prev('rolesUsuario') para enlazar este label al último
+          <input> generado por th:field="*{rolesUsuario}" en la iteración. 
+          Gracias a esto, al hacer clic en el texto del label se marca/desmarca el checkbox correspondiente.
+          -->
+          <label th:for="${#ids.prev('rolesUsuario')}" th:text="${rol}"></label>
+        </div>
+        <div
+          th:if="${#fields.hasErrors('rolesUsuario')}"
+          th:errors="*{rolesUsuario}"
+        ></div>
+      </div>
       <div>
         <input type="submit" value="Enviar" />
       </div>
