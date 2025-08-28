@@ -14,6 +14,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.pepito.jose.model.ItemFactura;
 import com.pepito.jose.model.Pais;
 import com.pepito.jose.model.Producto;
+import com.pepito.jose.model.Rol;
 import com.pepito.jose.model.Usuario;
 
 @Configuration
@@ -34,10 +35,10 @@ public class AppConfig {
     public Usuario retUsuario() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate fecha = LocalDate.parse("2025/03/15", formatter);
-        List<String> roles = new ArrayList<>();
-
-        roles.add("Usuario");
-        roles.add("Administrador");
+        List<Rol> roles = new ArrayList<>();
+        
+        roles.add(new Rol(1,"Administrador"));
+        roles.add(new Rol(2,"Usuario"));
         Usuario usuario = new Usuario("Jose","Perez",1,fecha,"1234","wawa@hotmail.com", "1", 200.2,new Pais(2,"ES","España"),roles);
         return usuario;
     }
