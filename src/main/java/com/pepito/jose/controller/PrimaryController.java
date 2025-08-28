@@ -16,8 +16,10 @@ import com.pepito.jose.editor.NombreMayusculaEditor;
 import com.pepito.jose.model.Factura;
 import com.pepito.jose.model.Pais;
 import com.pepito.jose.model.Producto;
+import com.pepito.jose.model.Rol;
 import com.pepito.jose.model.Usuario;
 import com.pepito.jose.services.PaisService;
+import com.pepito.jose.services.RolService;
 import com.pepito.jose.validators.UsuarioValidador;
 
 import jakarta.validation.Valid;
@@ -55,6 +57,8 @@ public class PrimaryController {
     @Autowired
     private PaisService paisService;
 
+    @Autowired
+    private RolService rolService;
     // @Autowired
     // private PaisPropertyEditor paisPropertyEditor;
 
@@ -211,4 +215,9 @@ public class PrimaryController {
     public List<String> rolesUsuario(){
         return List.of("Administrador","Usuario","Prueba");
     } 
+
+    @ModelAttribute("listaRoles")
+    public List<Rol> listaRoles(){
+        return this.rolService.listaRolesClasesUsuario();
+    }
 }

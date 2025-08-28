@@ -12,7 +12,7 @@ public class PaisServiceImpl implements PaisService{
 
     private List<Pais> listaPaises;
 
-    PaisServiceImpl(){
+    public PaisServiceImpl(){
         this.listaPaises = Arrays.asList(new Pais(1,"ES","España"),new Pais(2,"ME","Mexico"),new Pais(3,"CO","Colombia"), new Pais(4,"FR","Francia"),new Pais(5,"ITA","Italia"));
     }
     @Override
