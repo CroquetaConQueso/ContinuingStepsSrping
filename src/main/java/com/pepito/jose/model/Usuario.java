@@ -65,6 +65,6 @@ public class Usuario {
     private double fondosUsuario;
     @Valid
     private Pais paisUsuario;
-    @NotEmpty
+    @Valid
     private List<Rol> rolesUsuario;
 }

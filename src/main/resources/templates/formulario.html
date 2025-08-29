@@ -168,14 +168,14 @@
         <label>Rol Del Usuario</label>
         <!--Para hacer un for de un checkbox se debe de hacer con aterioridad comparado con por ejemplo un select y en un div en vez de en un option-->
         <div th:each="rol: ${listaRoles}">
-          <input type="checkbox" th:field="*{rolesUsuario}" th:value="${rolesUsuario.id}" />
+          <input type="checkbox" th:field="*{rolesUsuario}" th:value="${rol.idRol}" />
           <!--
           th:for NO itera; lo que hace es establecer dinámicamente el atributo "for" del <label>.
           En este caso se usa junto con #ids.prev('rolesUsuario') para enlazar este label al último
           <input> generado por th:field="*{rolesUsuario}" en la iteración. 
           Gracias a esto, al hacer clic en el texto del label se marca/desmarca el checkbox correspondiente.
           -->
-          <label th:for="${#ids.prev('rolesUsuario')}" th:text="${rolesUsuario.nombre}"></label>
+          <label th:for="${#ids.prev('rolesUsuario')}" th:text="${rol.nombreRol}"></label>
         </div>
         <div
           th:if="${#fields.hasErrors('rolesUsuario')}"

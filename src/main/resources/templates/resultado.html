@@ -66,7 +66,7 @@
       <div>
         <p>Roles</p>
         <ul>
-          <li th:each="rol: ${usuario.rolesUsuario}" th:text="${rol}">Rol: </span></li>
+          <li th:each="rol: ${usuario.rolesUsuario}" th:text="${'ID Rol: '+rol.getIdRol+'| Nombre Rol: '+rol.getNombreRol}"> </span></li>
         </ul>
       </div>
 

@@ -22,7 +22,7 @@ public class RolServiceImpl implements RolService{
     @Override
     public Rol obtenerRol(Integer ID) {
         for (Rol rol : listaRoles) {
-            if(ID == rol.getId()){
+            if(ID == rol.getIdRol()){
                 return rol;
             }
         }
