@@ -69,4 +69,5 @@ public class Usuario {
     private List<Rol> rolesUsuario;
     @NotEmpty
     private String generoUsuario;
+    private String secretoUsuario;
 }

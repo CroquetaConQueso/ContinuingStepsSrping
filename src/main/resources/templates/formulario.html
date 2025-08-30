@@ -191,6 +191,11 @@
         </div>
         <div th:if="${#fields.hasErrors('generoUsuario')}" th:errors="*{generoUsuario}">
         </div>
+      </div>
+      <!--Esto establece un valor secreto en el formulario el cual no se muestra pero se toma en consideracion-->
+      <div>
+        <input type="hidden" id="secretoUsuario" th:field="*{secretoUsuario}" >
+      </div>
       <div>
         <input type="submit" value="Enviar" />
       </div>

@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 // Si queremos que el atributo entity, el cual no esta mapeado persista(estamos
@@ -66,19 +68,26 @@ public class PrimaryController {
     public void initBinder(WebDataBinder binder) {
         // Al establecer un set estamos reemplazondo el validador por defecto con el
         // validador que hemos pasado, por lo que se pierde todas las anteriores
-        // anotaciones que se hayan establecido con anterioridad. Para esto vamos a utilizar addValidators
+        // anotaciones que se hayan establecido con anterioridad. Para esto vamos a
+        // utilizar addValidators
         binder.addValidators(validador);
 
-        
-        // Al establecer esto se definira sobre todas las clases de tipo String 
+        // Al establecer esto se definira sobre todas las clases de tipo String
 
         // Registramos un editor de propiedades para todos los campos de tipo String
-        // Esto significa que antes de hacer el data binding (copiar valores del formulario al objeto),
-        // cualquier String pasará por NombreMayusculaEditor, el cual lo transformará a MAYÚSCULAS y quitará espacios.
+        // Esto significa que antes de hacer el data binding (copiar valores del
+        // formulario al objeto),
+        // cualquier String pasará por NombreMayusculaEditor, el cual lo transformará a
+        // MAYÚSCULAS y quitará espacios.
         // Útil para normalizar entradas de texto (ej: nombres propios, códigos, etc.)
-    
-        binder.registerCustomEditor(String.class,"nameUsuario" ,new NombreMayusculaEditor());
-        //binder.registerCustomEditor(Pais.class,"pais", paisPropertyEditor);
+
+        binder.registerCustomEditor(String.class, "nameUsuario", new NombreMayusculaEditor());
+        // binder.registerCustomEditor(Pais.class,"pais", paisPropertyEditor);
+
+        binder.setDisallowedFields("secretoUsuario");
+        // Sirve para indicar al DataBinder qué propiedades del objeto destino
+        // (el que recibe datos del formulario o de la request) NO deben ser
+        // rellenadas con los valores que lleguen desde el cliente.
     }
 
     private Usuario usuario;
@@ -116,16 +125,24 @@ public class PrimaryController {
         // los campos aparezcan vacíos. De lo contrario, los valores escritos se
         // perderán al recargar la vista.
 
-        Usuario usuario = new Usuario();
-        usuario.setEmailUsuario("carlos@fuengirola1.es");
+        // He establecido un if para no machacar siempre la creacion del usuario al
+        // refrescar la peticion
+        if (!model.containsAttribute("usuario")) {
+            Usuario usuario = new Usuario();
+            usuario.setEmailUsuario("carlos@fuengirola1.es");
 
-        // Este valor se va a enviar a el metodo de usuario y pese a que lo tenga
-        // prestablecido con un valor, este valor se pierde.
-        usuario.setNameUsuario("Gilito");
-        usuario.setIdUsuario("1");
-        usuario.setFondosUsuario(3000.1);
-        model.addAttribute(usuario);
-
+            // Este valor se va a enviar a el metodo de usuario y pese a que lo tenga
+            // prestablecido con un valor, este valor se pierde.
+            usuario.setNameUsuario("Gilito");
+            usuario.setSurnameUsuario("Cobagumba");
+            usuario.setIdUsuario("1");
+            usuario.setFondosUsuario(3000.1);
+            usuario.setPaisUsuario(new Pais(3, "CO", "Colombia"));
+            usuario.setGeneroUsuario("Masculino");
+            usuario.setRolesUsuario(List.of(new Rol(2, "Usuario")));
+            usuario.setSecretoUsuario("Leche");
+            model.addAttribute(usuario);
+        }
         return "formulario";
     }
 
@@ -163,6 +180,11 @@ public class PrimaryController {
     // @ModelAttribute("usuario")
     @PostMapping("/formulario")
     public String procFormulario(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
+        // ****** Este inicio de metodo a cambiado, antes tenia: @PostMapping("/formulario")
+        // ****** public String procFormulario(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
+        // ****** Esto ha tenido que cambiarse debido a la nueva funcionalidad dada, al uso de la redireccion y al metodo ("ver")
+
+
 
         // Ya no es necesario al establecer el InitBinder
         // validador.validate(usuario, result);
@@ -176,53 +198,72 @@ public class PrimaryController {
             // ").concat(error.getDefaultMessage()));
             // });
             // model.addAttribute("error", errores);
+
+            // **** Se añade solo en el caso de que haya un error para no perder la informacion
+            model.addAttribute("usuario", usuario);
             return "formulario";
         }
 
-        model.addAttribute("usuario", usuario);
+        // ***** Antes teniamos aquí model.addAttribute("usuario", usuario); para añadirlo a la vista pero se va a mover dentro del error
+
         // Se establece un html, y cuando estos datos sean tomado, se mostraran en la
         // pagina de resultado
 
-        status.setComplete(); // Se limpia el objeto usuario de la @SessionAttributes
+        //status.setComplete(); Se limpia el objeto usuario de la @SessionAttributes
+        // Estamos estableciendo la nueva ruta en la cual vamos a evitar cargar el
+        // resultado en el modo Post. De esta manera, la carga se esta realizando en un
+        // get y con el metodo ver
+        return "redirect:/ver";
+    }
+
+    // Estoy creando este metodo para evitar hacer una redireccion a el resultado el
+    // cual se va a mostrar en Post, por lo que si se refresca la pagina terminaría
+    // mandado datos de nuevo al servidor o a la posible base de datos (mirar arriba
+    // en return "redirect:/ver para obtener más información")
+
+    @GetMapping("ver") // Se inyecta el usuario del session attributes, tomandose de la anotacion SessionAttributes
+    public String ver(@SessionAttribute("usuario") Usuario usuario, Model model, SessionStatus status) {
+        
+        model.addAttribute("usuario", usuario);
+        status.setComplete();
         return "resultado";
     }
 
     @ModelAttribute("paises")
-    public List<String> paises(){
-        return List.of("Egipto","España","Francia","Chile","Mexico");
-        
+    public List<String> paises() {
+        return List.of("Egipto", "España", "Francia", "Chile", "Mexico");
+
     }
 
     @ModelAttribute("paisesMap")
-    public Map<String,Pais> paisesMapa(){
-        Map<String,Pais> mapPaises = new HashMap<>();
-        mapPaises.put("EG", new Pais(1,"EG","Egipto"));
-        mapPaises.put("ES", new Pais(2,"ES","España"));
-        mapPaises.put("FR", new Pais(3,"FR","Francia"));
-        mapPaises.put("CL", new Pais(4,"CH","Chile"));
-        mapPaises.put("ME", new Pais(5,"ME","Mexico"));
-
+    public Map<String, Pais> paisesMapa() {
+        Map<String, Pais> mapPaises = new HashMap<>();
+        mapPaises.put("EG", new Pais(1, "EG", "Egipto"));
+        mapPaises.put("ES", new Pais(2, "ES", "España"));
+        mapPaises.put("FR", new Pais(3, "FR", "Francia"));
+        mapPaises.put("CL", new Pais(4, "CH", "Chile"));
+        mapPaises.put("ME", new Pais(5, "ME", "Mexico"));
 
         return mapPaises;
     }
 
     @ModelAttribute("listaGeneros")
-    public List<String> listaGeneros(){
-        return List.of("Masculino","Femenino","Neutro");
+    public List<String> listaGeneros() {
+        return List.of("Masculino", "Femenino", "Neutro");
     }
 
     @ModelAttribute("listaPaises")
-    public List<Pais> listaPaises(){
+    public List<Pais> listaPaises() {
         return paisService.Listar();
     }
 
     @ModelAttribute("listaRolesUsuario")
-    public List<String> rolesUsuario(){
-        return List.of("Administrador","Usuario","Prueba");
-    } 
+    public List<String> rolesUsuario() {
+        return List.of("Administrador", "Usuario", "Prueba");
+    }
 
     @ModelAttribute("listaRoles")
-    public List<Rol> listaRoles(){
+    public List<Rol> listaRoles() {
         return this.rolService.listaRolesClasesUsuario();
     }
 }
