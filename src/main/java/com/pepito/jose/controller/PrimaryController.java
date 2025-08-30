@@ -206,6 +206,11 @@ public class PrimaryController {
         return mapPaises;
     }
 
+    @ModelAttribute("listaGeneros")
+    public List<String> listaGeneros(){
+        return List.of("Masculino","Femenino","Neutro");
+    }
+
     @ModelAttribute("listaPaises")
     public List<Pais> listaPaises(){
         return paisService.Listar();

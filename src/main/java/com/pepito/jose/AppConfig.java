@@ -39,7 +39,7 @@ public class AppConfig {
         
         roles.add(new Rol(1,"Administrador"));
         roles.add(new Rol(2,"Usuario"));
-        Usuario usuario = new Usuario("Jose","Perez",1,fecha,"1234","wawa@hotmail.com", "1", 200.2,new Pais(2,"ES","España"),roles);
+        Usuario usuario = new Usuario("Jose","Perez",1,fecha,"1234","wawa@hotmail.com", "1", 200.2,new Pais(2,"ES","España"),roles,"Masculino");
         return usuario;
     }
 

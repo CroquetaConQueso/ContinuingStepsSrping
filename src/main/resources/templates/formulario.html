@@ -180,8 +180,17 @@
         <div
           th:if="${#fields.hasErrors('rolesUsuario')}"
           th:errors="*{rolesUsuario}"
-        ></div>
+        >
       </div>
+      <div>
+        <label>Genero Del Usuario</label>
+        <div th:each="gen : ${listaGeneros}">
+          <!--Como son dos botones, deben de tener dos ids diferentes-->
+          <input type="radio" th:field="*{generoUsuario}" th:value="${gen}">
+          <label th:for="${#ids.prev('generoUsuario')}" th:text="${gen}"></label>
+        </div>
+        <div th:if="${#fields.hasErrors('generoUsuario')}" th:errors="*{generoUsuario}">
+        </div>
       <div>
         <input type="submit" value="Enviar" />
       </div>

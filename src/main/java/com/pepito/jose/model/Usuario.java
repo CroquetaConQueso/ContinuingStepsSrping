@@ -67,4 +67,6 @@ public class Usuario {
     private Pais paisUsuario;
     @Valid
     private List<Rol> rolesUsuario;
+    @NotEmpty
+    private String generoUsuario;
 }
