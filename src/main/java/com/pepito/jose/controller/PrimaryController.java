@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
@@ -222,8 +221,10 @@ public class PrimaryController {
     // en return "redirect:/ver para obtener más información")
 
     @GetMapping("ver") // Se inyecta el usuario del session attributes, tomandose de la anotacion SessionAttributes
-    public String ver(@SessionAttribute("usuario") Usuario usuario, Model model, SessionStatus status) {
-        
+    public String ver(@SessionAttribute(name="usuario", required=false) Usuario usuario, Model model, SessionStatus status) {
+        if(usuario==null){
+            return "redirect:/formulario";
+        }
         model.addAttribute("usuario", usuario);
         status.setComplete();
         return "resultado";
