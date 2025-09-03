@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <title>Formulario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   </head>
   <body>
     <!--Para establecer que los datos van a ser tomados se ha de establecer th:action en el form. Especificando tambien que tipo de metodo va a ser(get,post,..)-->
     <!--Al establecer el th:object con usuario se puede mapear los valores a la clase pojo, en este caso a Usuario-->
+    <div class="container">
     <form th:action="@{/formulario}" th:object="${usuario}" method="post">
       <div>
         <h1>Formulario</h1>
         <label for="nameUsuario">Nombre de Usuario</label>
-        <div>
+        <div class="form-group">
           <!--Para que no borre los datos que estamos enviando , debemos de establecer un value en el input, ya que si ocurre un error borraria todo(resetearia todo)-->
           <!--Esto equivale a tener value="${nombreVariable}"-->
           <input
@@ -19,6 +21,7 @@
             placeholder="Introduzca el nombre.."
             id="nameUsuario"
             th:field="*{nameUsuario}"
+            class="form-control"
           />
           <!--Las referencias al th:object son con un * en vez de con un $-->
         </div>
@@ -40,7 +43,7 @@
           th:errors="*{nameUsuario}"
         ></div>
       </div>
-      <div>
+      <div class="form-group">
         <label for="surnameUsuario">Apellido del Usuario</label>
         <div>
           <input
@@ -48,6 +51,7 @@
             placeholder="Introduzca los apellidos.."
             id="surnameUsuario"
             th:field="*{surnameUsuario}"
+            class="form-control"
           />
         </div>
         <div
@@ -55,7 +59,7 @@
           th:errors="*{surnameUsuario}"
         ></div>
       </div>
-      <div>
+      <div class="form-group">
         <label for="edadUsuario">Edad del Usuario</label>
         <div>
           <!--Si se establece como type="number", la validacion ocurre en el navegador y no en el servidor spring.-->
@@ -64,6 +68,7 @@
             placeholder="Introduzca la edad.."
             id="edadUsuario"
             th:field="*{edadUsuario}"
+            class="form-control"
           />
         </div>
         <div
@@ -71,7 +76,7 @@
           th:errors="*{edadUsuario}"
         ></div>
       </div>
-      <div>
+      <div class="form-group">
         <label for="fechaNacimientoUsuario"
           >Fecha de Nacimiento del Usuario</label
         >
@@ -80,6 +85,7 @@
             type="date"
             id="fechaNacimientoUsuario"
             th:field="*{fechaNacimientoUsuario}"
+            class="form-control"
           />
         </div>
         <div
@@ -87,7 +93,7 @@
           th:errors="*{fechaNacimientoUsuario}"
         ></div>
       </div>
-      <div>
+      <div class="form-group">
         <label for="passwordUsuario">Contraseña del Usuario</label>
         <div>
           <input
@@ -95,6 +101,7 @@
             placeholder="Introduzca la contraseña.."
             id="passwordUsuario"
             th:field="*{passwordUsuario}"
+            class="form-control"
           />
         </div>
         <div
@@ -102,7 +109,7 @@
           th:errors="*{passwordUsuario}"
         ></div>
       </div>
-      <div>
+      <div class="form-group">
         <label for="emailUsuario">Email del Usuario</label>
         <div>
           <input
@@ -110,6 +117,7 @@
             placeholder="Introduzca el email del usuario"
             id="emailUsuario"
             th:field="*{emailUsuario}"
+            class="form-control"
           />
         </div>
         <div
@@ -117,7 +125,7 @@
           th:errors="*{emailUsuario}"
         ></div>
       </div>
-      <div>
+      <div class="form-group">
         <label for="idUsuario">ID del Usuario</label>
         <div>
           <input
@@ -125,6 +133,7 @@
             placeholder="Introduzca el ID de usuario.."
             id="idUsuario"
             th:field="*{idUsuario}"
+            class="form-control"
           />
         </div>
         <div
@@ -132,10 +141,10 @@
           th:errors="*{idUsuario}"
         ></div>
       </div>
-      <div>
+      <div class="form-group">
         <label for="paisUsuario">Pais del Usuario</label>
         <div>
-          <select id="paisUsuario" th:field="*{paisUsuario}">
+          <select id="paisUsuario" th:field="*{paisUsuario}" class="form-control">
             <!--Así es como se establece un valor por defecto en una opcion-->
             <option value="">--Seleccione el pais--</option>
             <!--Tenemos que tener en cuenta que siempre que se tome un valor(lo cual esta igualado por th:value), este va a 
@@ -164,11 +173,11 @@
         />
         </div> -->
 
-      <div>
+      <div class="form-group">
         <label>Rol Del Usuario</label>
         <!--Para hacer un for de un checkbox se debe de hacer con aterioridad comparado con por ejemplo un select y en un div en vez de en un option-->
         <div th:each="rol: ${listaRoles}">
-          <input type="checkbox" th:field="*{rolesUsuario}" th:value="${rol.idRol}" />
+          <input type="checkbox" th:field="*{rolesUsuario}" th:value="${rol.idRol}" class="form-control"/>
           <!--
           th:for NO itera; lo que hace es establecer dinámicamente el atributo "for" del <label>.
           En este caso se usa junto con #ids.prev('rolesUsuario') para enlazar este label al último
@@ -182,11 +191,11 @@
           th:errors="*{rolesUsuario}"
         >
       </div>
-      <div>
+      <div class="form-group">
         <label>Genero Del Usuario</label>
         <div th:each="gen : ${listaGeneros}">
           <!--Como son dos botones, deben de tener dos ids diferentes-->
-          <input type="radio" th:field="*{generoUsuario}" th:value="${gen}">
+          <input type="radio" th:field="*{generoUsuario}" th:value="${gen}" class="form-control">
           <label th:for="${#ids.prev('generoUsuario')}" th:text="${gen}"></label>
         </div>
         <div th:if="${#fields.hasErrors('generoUsuario')}" th:errors="*{generoUsuario}">
@@ -197,8 +206,9 @@
         <input type="hidden" id="secretoUsuario" th:field="*{secretoUsuario}" >
       </div>
       <div>
-        <input type="submit" value="Enviar" />
+        <input type="submit" value="Enviar" class="btn btn-primary"/>
       </div>
     </form>
+  </div>
   </body>
 </html>

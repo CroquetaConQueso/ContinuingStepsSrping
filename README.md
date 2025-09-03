@@ -9,3 +9,5 @@
 <p>Añadido un boton de radio para poder escoger genero<p>
 <p>Establecimiento de un valor secreto con input type="hidden"<p>
 <p>Trabajando en cambiar el metodo Post de la redireccion para mostrar el resultado del formulario al metodo get<p>
+<p>Establecimiento de sessionattribute, aprendiendo como funciona todo al detalle <p>
+<p>Añadiendo bootstrap<p>
