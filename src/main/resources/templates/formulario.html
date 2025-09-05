@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Formulario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link th:href="@{/css/estiloFormulario.css}" rel="stylesheet">
   </head>
   <body>
     <!--Para establecer que los datos van a ser tomados se ha de establecer th:action en el form. Especificando tambien que tipo de metodo va a ser(get,post,..)-->
@@ -13,7 +14,7 @@
       <div>
         <h1>Formulario</h1>
         <label for="nameUsuario">Nombre de Usuario</label>
-        <div class="form-group">
+        <div class="mb-3">
           <!--Para que no borre los datos que estamos enviando , debemos de establecer un value en el input, ya que si ocurre un error borraria todo(resetearia todo)-->
           <!--Esto equivale a tener value="${nombreVariable}"-->
           <input
@@ -43,7 +44,7 @@
           th:errors="*{nameUsuario}"
         ></div>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <label for="surnameUsuario">Apellido del Usuario</label>
         <div>
           <input
@@ -59,7 +60,7 @@
           th:errors="*{surnameUsuario}"
         ></div>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <label for="edadUsuario">Edad del Usuario</label>
         <div>
           <!--Si se establece como type="number", la validacion ocurre en el navegador y no en el servidor spring.-->
@@ -76,7 +77,7 @@
           th:errors="*{edadUsuario}"
         ></div>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <label for="fechaNacimientoUsuario"
           >Fecha de Nacimiento del Usuario</label
         >
@@ -93,7 +94,7 @@
           th:errors="*{fechaNacimientoUsuario}"
         ></div>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <label for="passwordUsuario">Contraseña del Usuario</label>
         <div>
           <input
@@ -109,7 +110,7 @@
           th:errors="*{passwordUsuario}"
         ></div>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <label for="emailUsuario">Email del Usuario</label>
         <div>
           <input
@@ -125,7 +126,7 @@
           th:errors="*{emailUsuario}"
         ></div>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <label for="idUsuario">ID del Usuario</label>
         <div>
           <input
@@ -141,10 +142,10 @@
           th:errors="*{idUsuario}"
         ></div>
       </div>
-      <div class="form-group">
+      <div class="mb-3">
         <label for="paisUsuario">Pais del Usuario</label>
         <div>
-          <select id="paisUsuario" th:field="*{paisUsuario}" class="form-control">
+          <select id="paisUsuario" th:field="*{paisUsuario}" class="form-select">
             <!--Así es como se establece un valor por defecto en una opcion-->
             <option value="">--Seleccione el pais--</option>
             <!--Tenemos que tener en cuenta que siempre que se tome un valor(lo cual esta igualado por th:value), este va a 
@@ -173,30 +174,30 @@
         />
         </div> -->
 
-      <div class="form-group">
-        <label>Rol Del Usuario</label>
+      <div class="mb-3">
+        <label class="form-label fw-bold">Rol Del Usuario</label>
         <!--Para hacer un for de un checkbox se debe de hacer con aterioridad comparado con por ejemplo un select y en un div en vez de en un option-->
-        <div th:each="rol: ${listaRoles}">
-          <input type="checkbox" th:field="*{rolesUsuario}" th:value="${rol.idRol}" class="form-control"/>
+        <div th:each="rol: ${listaRoles}" class="form-check">
+          <input class="form-check-input" type="checkbox" th:field="*{rolesUsuario}" th:value="${rol.idRol}"/>
           <!--
           th:for NO itera; lo que hace es establecer dinámicamente el atributo "for" del <label>.
           En este caso se usa junto con #ids.prev('rolesUsuario') para enlazar este label al último
           <input> generado por th:field="*{rolesUsuario}" en la iteración. 
           Gracias a esto, al hacer clic en el texto del label se marca/desmarca el checkbox correspondiente.
           -->
-          <label th:for="${#ids.prev('rolesUsuario')}" th:text="${rol.nombreRol}"></label>
+          <label class="form-check-label" th:for="${#ids.prev('rolesUsuario')}" th:text="${rol.nombreRol}"></label>
         </div>
         <div
           th:if="${#fields.hasErrors('rolesUsuario')}"
           th:errors="*{rolesUsuario}"
         >
       </div>
-      <div class="form-group">
-        <label>Genero Del Usuario</label>
-        <div th:each="gen : ${listaGeneros}">
+      <div class="mb-3">
+        <label class="form-label d-block fw-bold mb-2">Genero Del Usuario</label>
+        <div th:each="gen : ${listaGeneros}" class="form-check form-check-inline">
           <!--Como son dos botones, deben de tener dos ids diferentes-->
-          <input type="radio" th:field="*{generoUsuario}" th:value="${gen}" class="form-control">
-          <label th:for="${#ids.prev('generoUsuario')}" th:text="${gen}"></label>
+          <input type="radio" th:field="*{generoUsuario}" th:value="${gen}" class="form-check-input">
+          <label th:for="${#ids.prev('generoUsuario')}" th:text="${gen}" class="form-check-label"></label>
         </div>
         <div th:if="${#fields.hasErrors('generoUsuario')}" th:errors="*{generoUsuario}">
         </div>

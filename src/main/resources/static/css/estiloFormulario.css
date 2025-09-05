@@ -1,0 +1,11 @@
+.form-check {margin-bottom: .5rem;}
+.form-check-input {margin-right: .5rem;}
+.form-check-label {font-weight:900}
+
+.form-select{ min-height: 8px;}
+.invalid-feedback.d-block {margin-top: .25rem;}
+
+:root{
+    --bs-primary: #6f42c1;
+    --bs-border-radius: .5rem;
+}
