@@ -23,6 +23,7 @@
             id="nameUsuario"
             th:field="*{nameUsuario}"
             class="form-control"
+            th:errorclass="is-invalid"
           />
           <!--Las referencias al th:object son con un * en vez de con un $-->
         </div>
@@ -40,8 +41,8 @@
         Y va a ser cambiado por:
         una referencia a fields con una referencia de uso # a un plural de errores y un th:errors el cual tiene una referencia al th:object-->
         <div
-          th:if="${#fields.hasErrors('nameUsuario')}"
           th:errors="*{nameUsuario}"
+          class="invalid-feedback"
         ></div>
       </div>
       <div class="mb-3">
@@ -53,11 +54,12 @@
             id="surnameUsuario"
             th:field="*{surnameUsuario}"
             class="form-control"
+            th:errorclass="is-invalid"
           />
         </div>
         <div
-          th:if="${#fields.hasErrors('surnameUsuario')}"
           th:errors="*{surnameUsuario}"
+          class="invalid-feedback"
         ></div>
       </div>
       <div class="mb-3">
@@ -70,11 +72,12 @@
             id="edadUsuario"
             th:field="*{edadUsuario}"
             class="form-control"
+            th:errorclass="is-invalid"
           />
         </div>
         <div
-          th:if="${#fields.hasErrors('edadUsuario')}"
           th:errors="*{edadUsuario}"
+          class="invalid-feedback"
         ></div>
       </div>
       <div class="mb-3">
@@ -87,11 +90,12 @@
             id="fechaNacimientoUsuario"
             th:field="*{fechaNacimientoUsuario}"
             class="form-control"
+            th:errorclass="is-invalid"
           />
         </div>
         <div
-          th:if="${#fields.hasErrors('fechaNacimientoUsuario')}"
           th:errors="*{fechaNacimientoUsuario}"
+          class="invalid-feedback"
         ></div>
       </div>
       <div class="mb-3">
@@ -103,11 +107,12 @@
             id="passwordUsuario"
             th:field="*{passwordUsuario}"
             class="form-control"
+            th:errorclass="is-invalid"
           />
         </div>
         <div
-          th:if="${#fields.hasErrors('passwordUsuario')}"
           th:errors="*{passwordUsuario}"
+          class="invalid-feedback"
         ></div>
       </div>
       <div class="mb-3">
@@ -119,11 +124,12 @@
             id="emailUsuario"
             th:field="*{emailUsuario}"
             class="form-control"
+            th:errorclass="is-invalid"
           />
         </div>
         <div
-          th:if="${#fields.hasErrors('emailUsuario')}"
           th:errors="*{emailUsuario}"
+          class="invalid-feedback"
         ></div>
       </div>
       <div class="mb-3">
@@ -135,17 +141,18 @@
             id="idUsuario"
             th:field="*{idUsuario}"
             class="form-control"
+            th:errorclass="is-invalid"
           />
         </div>
         <div
-          th:if="${#fields.hasErrors('idUsuario')}"
           th:errors="*{idUsuario}"
+          class="invalid-feedback"
         ></div>
       </div>
       <div class="mb-3">
         <label for="paisUsuario">Pais del Usuario</label>
         <div>
-          <select id="paisUsuario" th:field="*{paisUsuario}" class="form-select">
+          <select id="paisUsuario" th:field="*{paisUsuario}" class="form-select" th:errorclass="is-invalid">
             <!--Así es como se establece un valor por defecto en una opcion-->
             <option value="">--Seleccione el pais--</option>
             <!--Tenemos que tener en cuenta que siempre que se tome un valor(lo cual esta igualado por th:value), este va a 
@@ -159,8 +166,8 @@
           </select>
         </div>
         <div
-          th:if="${#fields.hasErrors('paisUsuario')}"
           th:errors="*{paisUsuario}"
+          class="invalid-feedback"
         ></div>
       </div>
       <!-- <div>
@@ -178,7 +185,7 @@
         <label class="form-label fw-bold">Rol Del Usuario</label>
         <!--Para hacer un for de un checkbox se debe de hacer con aterioridad comparado con por ejemplo un select y en un div en vez de en un option-->
         <div th:each="rol: ${listaRoles}" class="form-check">
-          <input class="form-check-input" type="checkbox" th:field="*{rolesUsuario}" th:value="${rol.idRol}"/>
+          <input class="form-check-input" type="checkbox" th:field="*{rolesUsuario}" th:value="${rol.idRol}" th:errorclass="is-invalid"/>
           <!--
           th:for NO itera; lo que hace es establecer dinámicamente el atributo "for" del <label>.
           En este caso se usa junto con #ids.prev('rolesUsuario') para enlazar este label al último
@@ -188,18 +195,19 @@
           <label class="form-check-label" th:for="${#ids.prev('rolesUsuario')}" th:text="${rol.nombreRol}"></label>
         </div>
         <div
-          th:if="${#fields.hasErrors('rolesUsuario')}"
           th:errors="*{rolesUsuario}"
+          th:if="${it.index == 0}"
+          class="invalid-feedback"
         >
       </div>
       <div class="mb-3">
         <label class="form-label d-block fw-bold mb-2">Genero Del Usuario</label>
-        <div th:each="gen : ${listaGeneros}" class="form-check form-check-inline">
+        <div th:each="gen, it : ${listaGeneros}" class="form-check form-check-inline" >
           <!--Como son dos botones, deben de tener dos ids diferentes-->
-          <input type="radio" th:field="*{generoUsuario}" th:value="${gen}" class="form-check-input">
+          <input type="radio" th:field="*{generoUsuario}" th:value="${gen}" th:errorclass="is-invalid">
           <label th:for="${#ids.prev('generoUsuario')}" th:text="${gen}" class="form-check-label"></label>
         </div>
-        <div th:if="${#fields.hasErrors('generoUsuario')}" th:errors="*{generoUsuario}">
+        <div th:errors="*{generoUsuario}" th:if="${it.index == 0}" class="invalid-feedback">
         </div>
       </div>
       <!--Esto establece un valor secreto en el formulario el cual no se muestra pero se toma en consideracion-->
