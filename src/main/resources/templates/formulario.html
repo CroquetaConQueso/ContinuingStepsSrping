@@ -11,10 +11,10 @@
     <!--Al establecer el th:object con usuario se puede mapear los valores a la clase pojo, en este caso a Usuario-->
     <div class="container">
     <form th:action="@{/formulario}" th:object="${usuario}" method="post">
-      <div>
+      <div class="mb-3">
         <h1>Formulario</h1>
-        <label for="nameUsuario">Nombre de Usuario</label>
-        <div class="mb-3">
+        <label for="nameUsuario" class="form-label">Nombre de Usuario</label>
+        <div>
           <!--Para que no borre los datos que estamos enviando , debemos de establecer un value en el input, ya que si ocurre un error borraria todo(resetearia todo)-->
           <!--Esto equivale a tener value="${nombreVariable}"-->
           <input
@@ -150,7 +150,7 @@
         ></div>
       </div>
       <div class="mb-3">
-        <label for="paisUsuario">Pais del Usuario</label>
+        <label for="paisUsuario" class="form-label">Pais del Usuario</label>
         <div>
           <select id="paisUsuario" th:field="*{paisUsuario}" class="form-select" th:errorclass="is-invalid">
             <!--Así es como se establece un valor por defecto en una opcion-->
@@ -196,18 +196,17 @@
         </div>
         <div
           th:errors="*{rolesUsuario}"
-          th:if="${it.index == 0}"
           class="invalid-feedback"
         >
       </div>
       <div class="mb-3">
         <label class="form-label d-block fw-bold mb-2">Genero Del Usuario</label>
-        <div th:each="gen, it : ${listaGeneros}" class="form-check form-check-inline" >
+        <div th:each="gen: ${listaGeneros}" class="form-check form-check-inline" >
           <!--Como son dos botones, deben de tener dos ids diferentes-->
           <input type="radio" th:field="*{generoUsuario}" th:value="${gen}" th:errorclass="is-invalid">
           <label th:for="${#ids.prev('generoUsuario')}" th:text="${gen}" class="form-check-label"></label>
         </div>
-        <div th:errors="*{generoUsuario}" th:if="${it.index == 0}" class="invalid-feedback">
+        <div th:errors="*{generoUsuario}" class="invalid-feedback">
         </div>
       </div>
       <!--Esto establece un valor secreto en el formulario el cual no se muestra pero se toma en consideracion-->
