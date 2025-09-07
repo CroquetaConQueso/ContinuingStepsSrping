@@ -145,7 +145,7 @@ public class PrimaryController {
         return "formulario";
     }
 
-    // Se establece que se van a tomar ciertos valores en una pagina
+    // Se establece que se van a tomar ciertos valores en una pagina para el servidor
     // Se puede realizar de muchas maneras la creacion o el traspaso de valores, en
     // nuestro anterior caso hicimos:
     // public String procFormulario(Model model, @RequestParam String username,

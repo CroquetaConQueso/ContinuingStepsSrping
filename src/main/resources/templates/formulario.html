@@ -10,11 +10,11 @@
     <!--Para establecer que los datos van a ser tomados se ha de establecer th:action en el form. Especificando tambien que tipo de metodo va a ser(get,post,..)-->
     <!--Al establecer el th:object con usuario se puede mapear los valores a la clase pojo, en este caso a Usuario-->
     <div class="container">
-    <form th:action="@{/formulario}" th:object="${usuario}" method="post">
-      <div class="mb-3">
-        <h1>Formulario</h1>
-        <label for="nameUsuario" class="form-label">Nombre de Usuario</label>
-        <div>
+      <form th:action="@{/formulario}" th:object="${usuario}" method="post">
+      <h1 class="text-center mb-3">Formulario</h1>
+      <div class="row gx-2 gy-2 align-items-center mb-3">
+        <label for="nameUsuario" class="col-auto col-form-label pe-2">Nombre de Usuario</label>
+        <div class="col-sm-9">
           <!--Para que no borre los datos que estamos enviando , debemos de establecer un value en el input, ya que si ocurre un error borraria todo(resetearia todo)-->
           <!--Esto equivale a tener value="${nombreVariable}"-->
           <input
@@ -22,7 +22,7 @@
             placeholder="Introduzca el nombre.."
             id="nameUsuario"
             th:field="*{nameUsuario}"
-            class="form-control"
+            class="form-control col-sm-2"
             th:errorclass="is-invalid"
           />
           <!--Las referencias al th:object son con un * en vez de con un $-->
@@ -45,15 +45,15 @@
           class="invalid-feedback"
         ></div>
       </div>
-      <div class="mb-3">
-        <label for="surnameUsuario">Apellido del Usuario</label>
-        <div>
+      <div class="row gx-2 gy-2 align-items-center mb-3">
+        <label for="surnameUsuario" class="col-auto col-form-label pe-2">Apellido del Usuario</label>
+        <div class="col-sm-9">
           <input
             type="text"
             placeholder="Introduzca los apellidos.."
             id="surnameUsuario"
             th:field="*{surnameUsuario}"
-            class="form-control"
+            class="form-control col-sm-2"
             th:errorclass="is-invalid"
           />
         </div>
@@ -62,16 +62,16 @@
           class="invalid-feedback"
         ></div>
       </div>
-      <div class="mb-3">
-        <label for="edadUsuario">Edad del Usuario</label>
-        <div>
+      <div class="row gx-2 gy-2 align-items-center mb-3">
+        <label for="edadUsuario" class="col-auto col-form-label pe-2">Edad del Usuario</label>
+        <div class="col-sm-9">
           <!--Si se establece como type="number", la validacion ocurre en el navegador y no en el servidor spring.-->
           <input
             type="text"
             placeholder="Introduzca la edad.."
             id="edadUsuario"
             th:field="*{edadUsuario}"
-            class="form-control"
+            class="form-control col-sm-2"
             th:errorclass="is-invalid"
           />
         </div>
@@ -80,16 +80,14 @@
           class="invalid-feedback"
         ></div>
       </div>
-      <div class="mb-3">
-        <label for="fechaNacimientoUsuario"
-          >Fecha de Nacimiento del Usuario</label
-        >
-        <div>
+      <div class="row gx-2 gy-2 align-items-center mb-3">
+        <label for="fechaNacimientoUsuario" class="col-auto col-form-label pe-2">Fecha de Nacimiento del Usuario</label>
+        <div class="col-sm-9">
           <input
             type="date"
             id="fechaNacimientoUsuario"
             th:field="*{fechaNacimientoUsuario}"
-            class="form-control"
+            class="form-control col-sm-2"
             th:errorclass="is-invalid"
           />
         </div>
@@ -98,15 +96,15 @@
           class="invalid-feedback"
         ></div>
       </div>
-      <div class="mb-3">
-        <label for="passwordUsuario">Contraseña del Usuario</label>
-        <div>
+      <div class="row gx-2 gy-2 align-items-center mb-3">
+        <label for="passwordUsuario" class="col-auto col-form-label pe-2">Contraseña del Usuario</label>
+        <div class="col-sm-9">
           <input
             type="password"
             placeholder="Introduzca la contraseña.."
             id="passwordUsuario"
             th:field="*{passwordUsuario}"
-            class="form-control"
+            class="form-control col-sm-2"
             th:errorclass="is-invalid"
           />
         </div>
@@ -115,15 +113,15 @@
           class="invalid-feedback"
         ></div>
       </div>
-      <div class="mb-3">
-        <label for="emailUsuario">Email del Usuario</label>
-        <div>
+      <div class="row gx-2 gy-2 align-items-center mb-3">
+        <label for="emailUsuario" class="col-auto col-form-label pe-2">Email del Usuario</label>
+        <div class="col-sm-9">
           <input
             type="email"
             placeholder="Introduzca el email del usuario"
             id="emailUsuario"
             th:field="*{emailUsuario}"
-            class="form-control"
+            class="form-control col-sm-2"
             th:errorclass="is-invalid"
           />
         </div>
@@ -132,15 +130,15 @@
           class="invalid-feedback"
         ></div>
       </div>
-      <div class="mb-3">
-        <label for="idUsuario">ID del Usuario</label>
-        <div>
+      <div class="row gx-2 gy-2 align-items-center mb-3">
+        <label for="idUsuario" class="col-auto col-form-label pe-2">ID del Usuario</label>
+        <div class="col-sm-9">
           <input
             type="text"
             placeholder="Introduzca el ID de usuario.."
             id="idUsuario"
             th:field="*{idUsuario}"
-            class="form-control"
+            class="form-control col-sm-2"
             th:errorclass="is-invalid"
           />
         </div>
@@ -149,10 +147,10 @@
           class="invalid-feedback"
         ></div>
       </div>
-      <div class="mb-3">
-        <label for="paisUsuario" class="form-label">Pais del Usuario</label>
-        <div>
-          <select id="paisUsuario" th:field="*{paisUsuario}" class="form-select" th:errorclass="is-invalid">
+      <div class="row gx-2 gy-2 align-items-center mb-3">
+        <label for="paisUsuario" class="col-auto col-form-label pe-2">Pais del Usuario</label>
+        <div class="col-sm-9">
+          <select id="paisUsuario" th:field="*{paisUsuario}" class="form-select col-sm-2" th:errorclass="is-invalid">
             <!--Así es como se establece un valor por defecto en una opcion-->
             <option value="">--Seleccione el pais--</option>
             <!--Tenemos que tener en cuenta que siempre que se tome un valor(lo cual esta igualado por th:value), este va a 
@@ -181,7 +179,7 @@
         />
         </div> -->
 
-      <div class="mb-3">
+      <div class="row gx-2 gy-2 align-items-center mb-3">
         <label class="form-label fw-bold">Rol Del Usuario</label>
         <!--Para hacer un for de un checkbox se debe de hacer con aterioridad comparado con por ejemplo un select y en un div en vez de en un option-->
         <div th:each="rol: ${listaRoles}" class="form-check">
@@ -199,7 +197,7 @@
           class="invalid-feedback"
         >
       </div>
-      <div class="mb-3">
+      <div class="row gx-2 gy-2 align-items-center mb-3">
         <label class="form-label d-block fw-bold mb-2">Genero Del Usuario</label>
         <div th:each="gen: ${listaGeneros}" class="form-check form-check-inline" >
           <!--Como son dos botones, deben de tener dos ids diferentes-->

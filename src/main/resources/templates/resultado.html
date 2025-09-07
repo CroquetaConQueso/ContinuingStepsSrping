@@ -37,39 +37,38 @@
     - #temporals -> Utilidades para java.time.* (LocalDate, LocalDateTime, etc.)
        -->
 
-    <div>
-      <h1>Resultado del Formulario</h1>
-      <ul>
-        <li>
-          Nombre de Usuario: <span th:text="${usuario.nameUsuario}"></span>
-        </li>
-        <li>Apellido: <span th:text="${usuario.surnameUsuario}"></span></li>
-        <li>Edad: <span th:text="${usuario.edadUsuario}"></span></li>
-        <li>Contraseña: <span th:text="${usuario.passwordUsuario}"></span></li>
-        <li>Email: <span th:text="${usuario.emailUsuario}"></span></li>
-        <li>ID Usuario: <span th:text="${usuario.idUsuario}"></span></li>
-        <li>Fondos: <span th:text="${usuario.fondosUsuario}"></span></li>
-        <li>Valor Secreto: <span th:text="${usuario.secretoUsuario}"></span></li>
+    <div class="container">
+      <a th:href="@/formulario" class="btn btn-success mb-3">Volver</a>
+      <h1 class="text-center mb-3">Resultado del Formulario</h1>
+      <ul class="list-group">
+        <li class="list-group-item">Nombre de Usuario: <span th:text="${usuario.nameUsuario}"></span></li>
+        <li class="list-group-item">Apellido: <span th:text="${usuario.surnameUsuario}"></span></li>
+        <li class="list-group-item">Edad: <span th:text="${usuario.edadUsuario}"></span></li>
+        <li class="list-group-item">Contraseña: <span th:text="${usuario.passwordUsuario}"></span></li>
+        <li class="list-group-item">Email: <span th:text="${usuario.emailUsuario}"></span></li>
+        <li class="list-group-item">ID Usuario: <span th:text="${usuario.idUsuario}"></span></li>
+        <li class="list-group-item">Fondos: <span th:text="${usuario.fondosUsuario}"></span></li>
+        <li class="list-group-item">Valor Secreto: <span th:text="${usuario.secretoUsuario}"></span></li>
         <!--Actualmente la fecha es mostrada con el formato americano, para poder cambiarlo debemos 
         de utilizar un método. En este caso, vamos a utilizar una de las funciones encontradas en thymeleaf
          para organizar de mejor manera este formato-->
-        <li>
+        <li class="list-group-item">
           Fecha De Nacimiento:
           <span
             th:text="${#temporals.format(usuario.fechaNacimientoUsuario, 'dd/MM/yyyy')}"
           ></span>
         </li>
-        <li>Genero: <span th:text="${usuario.generoUsuario}"></span></li>
-        <li>Pais: <span th:text="${usuario.paisUsuario.getIdPais}"></span></li>
-        <li>Pais: <span th:text="${usuario.paisUsuario.getNombrePais}"></span></li>
-        <li>Pais: <span th:text="${usuario.paisUsuario.getAbreviacionPais}"></span></li>
+        <li class="list-group-item">Genero: <span th:text="${usuario.generoUsuario}"></span></li>
+        <li class="list-group-item">Pais: <span th:text="${usuario.paisUsuario.getIdPais}"></span></li>
+        <li class="list-group-item">Pais: <span th:text="${usuario.paisUsuario.getNombrePais}"></span></li>
+        <li class="list-group-item">Pais: <span th:text="${usuario.paisUsuario.getAbreviacionPais}"></span></li>
         <!-- No queda bien tenerlo todo en una linea, ya que si se escoge más de un rol se obtiene: UsuarioAdministrador,..
          <li>Rol: <span th:each="rol: ${usuario.rolesUsuario}" th:text="${rol}"></span></li>-->
       </ul>
       <div>
-        <p>Roles</p>
-        <ul>
-          <li th:each="rol: ${usuario.rolesUsuario}" th:text="${'ID Rol: '+rol.getIdRol+'| Nombre Rol: '+rol.getNombreRol}"> </span></li>
+        <h2 class="text-center mb-4">Roles</h2>
+        <ul class="list-group">
+          <li class="list-group-item" th:each="rol: ${usuario.rolesUsuario}" th:text="${'ID Rol: '+rol.getIdRol+'| Nombre Rol: '+rol.getNombreRol}"> </span></li>
         </ul>
       </div>
 
