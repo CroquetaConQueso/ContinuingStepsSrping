@@ -38,7 +38,6 @@
        -->
 
     <div class="container">
-      <a th:href="@/formulario" class="btn btn-success mb-3">Volver</a>
       <h1 class="text-center mb-3">Resultado del Formulario</h1>
       <ul class="list-group">
         <li class="list-group-item">Nombre de Usuario: <span th:text="${usuario.nameUsuario}"></span></li>
@@ -51,11 +50,11 @@
         <li class="list-group-item">Valor Secreto: <span th:text="${usuario.secretoUsuario}"></span></li>
         <!--Actualmente la fecha es mostrada con el formato americano, para poder cambiarlo debemos 
         de utilizar un método. En este caso, vamos a utilizar una de las funciones encontradas en thymeleaf
-         para organizar de mejor manera este formato-->
+        para organizar de mejor manera este formato-->
         <li class="list-group-item">
           Fecha De Nacimiento:
           <span
-            th:text="${#temporals.format(usuario.fechaNacimientoUsuario, 'dd/MM/yyyy')}"
+          th:text="${#temporals.format(usuario.fechaNacimientoUsuario, 'dd/MM/yyyy')}"
           ></span>
         </li>
         <li class="list-group-item">Genero: <span th:text="${usuario.generoUsuario}"></span></li>
@@ -63,7 +62,7 @@
         <li class="list-group-item">Pais: <span th:text="${usuario.paisUsuario.getNombrePais}"></span></li>
         <li class="list-group-item">Pais: <span th:text="${usuario.paisUsuario.getAbreviacionPais}"></span></li>
         <!-- No queda bien tenerlo todo en una linea, ya que si se escoge más de un rol se obtiene: UsuarioAdministrador,..
-         <li>Rol: <span th:each="rol: ${usuario.rolesUsuario}" th:text="${rol}"></span></li>-->
+        <li>Rol: <span th:each="rol: ${usuario.rolesUsuario}" th:text="${rol}"></span></li>-->
       </ul>
       <div>
         <h2 class="text-center mb-4">Roles</h2>
@@ -71,7 +70,10 @@
           <li class="list-group-item" th:each="rol: ${usuario.rolesUsuario}" th:text="${'ID Rol: '+rol.getIdRol+'| Nombre Rol: '+rol.getNombreRol}"> </span></li>
         </ul>
       </div>
-
+      <!--Boton para volver al formulario-->
+      <div>
+        <a th:href="@{/formulario}" class="btn btn-success mb-3">Volver</a>
+      </div>
     </div>
   </body>
 </html>
