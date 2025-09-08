@@ -238,3 +238,6 @@
       </div>
       <div class="invalid-feedback d-block" th:errors="*{generoUsuario}"></div>
     </div>
+
+
+<p>Aprendiendo que son los interceptores<p>
