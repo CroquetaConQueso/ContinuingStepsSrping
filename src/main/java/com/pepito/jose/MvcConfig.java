@@ -22,6 +22,6 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //Para establecer que el interceptor solo se aplique a X se debe de utilizar .addPathPatterns
-        registry.addInterceptor(interceptor).addPathPatterns("/formulario/**");
+        registry.addInterceptor(interceptor).addPathPatterns("/formulario/**","/ver");
     }
 }

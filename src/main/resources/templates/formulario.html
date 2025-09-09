@@ -7,6 +7,7 @@
     <link th:href="@{/css/estiloFormulario.css}" rel="stylesheet">
   </head>
   <body>
+    <section th:replace="components/tiempo :: interceptor"></section>
     <!--Para establecer que los datos van a ser tomados se ha de establecer th:action en el form. Especificando tambien que tipo de metodo va a ser(get,post,..)-->
     <!--Al establecer el th:object con usuario se puede mapear los valores a la clase pojo, en este caso a Usuario-->
     <div class="container">
