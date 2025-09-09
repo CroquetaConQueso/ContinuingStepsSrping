@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 //Un interceptor puede ser establecido como un component
-@Component
+@Component("tiempoTranscurridoInterceptor")
 public class TiempoTranscurridoInterceptor implements HandlerInterceptor {
     
     private static final Logger logger = LoggerFactory.getLogger(TiempoTranscurridoInterceptor.class);
